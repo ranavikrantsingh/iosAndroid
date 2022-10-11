@@ -87,7 +87,7 @@ const CreateAccount = props => {
           }}
           theme={{
             colors: {
-              primary: Colors.pink,
+              primary: Colors.background,
               placeholder: Colors.background,
               text: Colors.background,
               borderWidth: 1,
@@ -145,7 +145,7 @@ const CreateAccount = props => {
           }}
           theme={{
             colors: {
-              primary: Colors.pink,
+              primary: Colors.background,
               placeholder: Colors.background,
               text: Colors.background,
               borderWidth: 1,

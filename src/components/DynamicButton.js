@@ -27,7 +27,7 @@ const DynamicButton = props => {
               source={require('../assets/animations/ShakyButton.json')}
               autoPlay
               autoSize
-              Loop
+              Loop={false}
             />
 
             <ActivityIndicator
@@ -50,7 +50,7 @@ const DynamicButton = props => {
               source={require('../assets/animations/ShakyButton.json')}
               autoPlay
               autoSize
-              Loop
+              Loop={false}
             />
 
             <Text
