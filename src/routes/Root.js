@@ -1,5 +1,4 @@
 import React, {Component, useEffect} from 'react';
-import OneSignal from 'react-native-onesignal';
 import {Alert, BackHandler, View, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 
@@ -52,8 +51,8 @@ class Root extends Component {
 }
 
 const mapStateToProps = state => ({
-  deviceId: state.partnerReducer.deviceId,
-  isAuthenticated: state.partnerReducer.isAuthenticated,
+  deviceId: state.appReducer.deviceId,
+  isAuthenticated: state.appReducer.isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch => ({

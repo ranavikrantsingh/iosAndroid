@@ -62,7 +62,7 @@ const CreateAccount = props => {
           value={name}
           error={hasNameErrors}
           keyboardType={'number-pad'}
-          maxLength={10}
+          maxLength={30}
           returnKeyType={'done'}
           onChangeText={name => {
             setName(name), setHasNameErrors(false);
