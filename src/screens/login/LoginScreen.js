@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, Pressable} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
@@ -7,6 +7,7 @@ import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
 import ButtonComponent from '../../components/ButtonComponent';
 import DynamicButton from '../../components/DynamicButton';
+import { Checkbox } from 'native-base';
 const LoginScreen = props => {
   const [mobile, setMobile] = useState('');
   const [hasMobileErrors, setMobileErrors] = useState(false);
@@ -118,9 +119,15 @@ const LoginScreen = props => {
         ) : null}
 
         <View style={[styles.row, {paddingVertical: scale(20)}]}>
+          <Checkbox/>
           <Text style={[all_styles.span_14_m, {marginLeft: scale(5)}]}>
-            I Accept Terms and Conditions
+            I Accept
           </Text>
+          <Pressable onPress={() => props.navigation.navigate('TermsScreen')}>
+            <Text style={[all_styles.span_14_m, {marginLeft: scale(2)}]}>
+              Terms and Conditions
+            </Text>
+          </Pressable>
         </View>
         <DynamicButton onPress={() => handleLogin()}>Proceed</DynamicButton>
       </View>

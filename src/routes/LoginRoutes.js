@@ -48,6 +48,11 @@ export default function Routes(props) {
           component={CreateAccount}
           options={{title: 'Create Account'}}
         />
+        <Stack.Screen
+          name="TermsScreen"
+          component={TermsScreen}
+          options={{title: 'Terms and Conditions'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
