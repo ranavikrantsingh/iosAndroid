@@ -1,29 +1,38 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 import React from 'react';
-import OTPInputView from '@twotalltotems/react-native-otp-input'
-
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import DynamicButton from '../../components/DynamicButton';
+import {scale} from '../../utils/scaling';
 const OtpScreen = props => {
   const {contact} = props?.route?.params;
-  console.log('====================================');
-  console.log(contact);
-  console.log('====================================');
+  const handleOnLogin = () => {};
   return (
-    <View>
-      <OTPInputView
-       style={{width: '80%', height: 200}}
-       pinCount={4}
-       // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-       // onCodeChanged = {code => { this.setState({code})}}
-       autoFocusOnLoad
-       codeInputFieldStyle={styles.underlineStyleBase}
-       codeInputHighlightStyle={styles.underlineStyleHighLighted}
-       onCodeFilled = {(code => {
-           console.log(`Code is ${code}, you are good to go!`)
-       })}/>
-    </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.insideContainer}>
+        <OTPInputView
+          style={{width: '80%', height: 200}}
+          pinCount={4}
+          autoFocusOnLoad
+          codeInputFieldStyle={styles.underlineStyleBase}
+          codeInputHighlightStyle={styles.underlineStyleHighLighted}
+          onCodeFilled={code => {
+            console.log(`Code is ${code}, you are good to go!`);
+          }}
+        />
+        <DynamicButton>Login</DynamicButton>
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default OtpScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  insideContainer: {
+    marginHorizontal: scale(23),
+  },
+});

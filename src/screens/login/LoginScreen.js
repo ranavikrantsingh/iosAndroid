@@ -6,6 +6,7 @@ import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
 import ButtonComponent from '../../components/ButtonComponent';
+import DynamicButton from '../../components/DynamicButton';
 const LoginScreen = props => {
   const [mobile, setMobile] = useState('');
   const [hasMobileErrors, setMobileErrors] = useState(false);
@@ -30,10 +31,10 @@ const LoginScreen = props => {
     let validation = handleValidationforLogin(data);
     if (validation.isValid) {
       props.navigation.navigate({
-        name:'OtpScreen',
-        params:{
-          contact:mobile
-        }
+        name: 'OtpScreen',
+        params: {
+          contact: mobile,
+        },
       });
     } else {
       seterror('*this field is required');
@@ -121,7 +122,7 @@ const LoginScreen = props => {
             I Accept Terms and Conditions
           </Text>
         </View>
-        <ButtonComponent name={'Proceed'} onPress={() => handleLogin()} />
+        <DynamicButton onPress={() => handleLogin()}>Proceed</DynamicButton>
       </View>
     </SafeAreaView>
   );
