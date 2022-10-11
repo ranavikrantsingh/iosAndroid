@@ -29,7 +29,12 @@ const LoginScreen = props => {
     data.friend_phone = mobile;
     let validation = handleValidationforLogin(data);
     if (validation.isValid) {
-      props.navigation.navigate('OtpScreen');
+      props.navigation.navigate({
+        name:'OtpScreen',
+        params:{
+          contact:mobile
+        }
+      });
     } else {
       seterror('*this field is required');
     }
