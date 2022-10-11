@@ -7,8 +7,9 @@ const OtpScreen = props => {
   const {contact} = props?.route?.params;
   var replaced = contact.replace(/^(.{2}).*(.{3}).*(.{4})$/, `$1****$3`);
 
-
-  const handleOnLogin = () => {};
+  const handleOnLogin = () => {
+    props.navigation.navigate('CreateAccount');
+  };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.insideContainer}>

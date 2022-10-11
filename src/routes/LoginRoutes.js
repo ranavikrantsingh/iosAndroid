@@ -3,9 +3,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Login from '../screens/login/LoginScreen';
 import OtpScreen from '../screens/login/OtpScreen';
-// import TermsScreen from '../screens/login/TermsScreen';
-// import PrivacyScreen from '../screens/login/PrivacyScreen';
+import TermsScreen from '../screens/login/TermsScreen';
+import PrivacyScreen from '../screens/login/PrivacyScreen';
 // import Notifications from '../screens/dashboard/Notifications';
+import CreateAccount from '../screens/login/CreateAccount'
 // import Profile from '../screens/dashboard/Profile';
 // import Myjobs from '../screens/pickajob/dailyCleaning/Myjobs';
 // import LocationCheck from '../screens/pickajob/dailyCleaning/LocationCheck';
@@ -41,6 +42,11 @@ export default function Routes(props) {
           name="OtpScreen"
           component={OtpScreen}
           options={{title: 'Login'}}
+        />
+         <Stack.Screen
+          name="CreateAccount"
+          component={CreateAccount}
+          options={{title: 'Create Account'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
