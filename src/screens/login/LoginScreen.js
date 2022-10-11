@@ -1,13 +1,19 @@
-import {StyleSheet, Text, View, SafeAreaView, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Pressable,
+  StatusBar,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
-import ButtonComponent from '../../components/ButtonComponent';
 import DynamicButton from '../../components/DynamicButton';
-import { Checkbox } from 'native-base';
+import CheckBoxSquare from '../../components/CheckBoxSquare';
 const LoginScreen = props => {
   const [mobile, setMobile] = useState('');
   const [hasMobileErrors, setMobileErrors] = useState(false);
@@ -43,6 +49,7 @@ const LoginScreen = props => {
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar backgroundColor={'#fff'} barStyle={'#fff'} animated={true} />
       <View style={styles.insideContainer}>
         <Text style={styles.welcomeText}>Welcome</Text>
         <Text style={styles.belowText}>
@@ -119,7 +126,7 @@ const LoginScreen = props => {
         ) : null}
 
         <View style={[styles.row, {paddingVertical: scale(20)}]}>
-          <Checkbox/>
+          <CheckBoxSquare />
           <Text style={[all_styles.span_14_m, {marginLeft: scale(5)}]}>
             I Accept
           </Text>
