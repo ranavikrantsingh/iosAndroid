@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView,TouchableOpacity,Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
-import ButtonComponent from '../../components/ButtonComponent';
+import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
   const [name, setName] = useState('');
@@ -48,14 +48,20 @@ const CreateAccount = props => {
       //   name: 'OtpScreen',
       // });
     } else {
-      toastr.showToast(validation.message)
+      toastr.showToast(validation.message);
     }
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.halfScreen}>
+        <TouchableOpacity>
+          <View style={styles.round}>
+            <LottieView source={require('../../assets/animations/Profile.json')}autoPlay autoSize style={{borderRadius:scale(100),marginTop:scale(-4)}}/>
+          </View>
+        </TouchableOpacity>
+      </View>
       <View style={styles.insideContainer}>
         <Text style={styles.belowText}>Please enter your details.</Text>
-
         <TextInput
           mode="flat"
           label="Name"
@@ -113,7 +119,7 @@ const CreateAccount = props => {
             },
           ]}
         />
-        
+
         <TextInput
           mode="flat"
           label="Email"
@@ -170,7 +176,6 @@ const CreateAccount = props => {
             },
           ]}
         />
-        
 
         <DynamicButton onPress={() => handleCreateAccount()}>
           Save
@@ -190,7 +195,8 @@ const styles = StyleSheet.create({
   insideContainer: {
     marginHorizontal: scale(23),
     marginTop: '20%',
-    flex: 1,
+    borderTopLeftRadius: scale(20),
+    borderTopRightRadius: scale(20),
   },
   welcomeText: {
     fontSize: scale(30),
@@ -204,4 +210,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  halfScreen: {
+    backgroundColor: Colors.teal,
+    flex: 0.6,
+    alignItems:'center',
+  },
+  round:{
+    backgroundColor:'#fff',
+    alignItems:'center',
+    borderRadius:scale(100),
+    borderWidth:scale(3),
+    marginTop:'20%'
+  }
 });

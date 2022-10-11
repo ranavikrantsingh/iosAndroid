@@ -46,7 +46,7 @@ export default function Routes(props) {
          <Stack.Screen
           name="CreateAccount"
           component={CreateAccount}
-          options={{title: 'Create Account'}}
+          options={HiddenScreenOptions}
         />
         <Stack.Screen
           name="TermsScreen"
