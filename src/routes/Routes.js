@@ -2,8 +2,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import all_styles from '../styles/all_styles';
-import HomeScreen from '../screens/home/HomeScreen'
-
+import HomeScreen from '../screens/home/HomeScreen';
+import TabNavigator from './TabNavigator';
 import {Image, View} from 'react-native';
 const Stack = createNativeStackNavigator();
 const defaultScreenOptions = {
@@ -20,14 +20,13 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={HomeScreen}>
-       
-        <Stack.Screen
-          name="LoginScreen"
+        initialRouteName={TabNavigator}>
+        {/* <Stack.Screen
+          name="HomeScreen"
           component={HomeScreen}
           options={HiddenScreenOptions}
-        />
-        
+        /> */}
+        <Stack.Screen name="Tabs" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

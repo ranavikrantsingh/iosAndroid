@@ -1,14 +1,81 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {scale} from '../utils/scaling';
+import HomeScreen from '../screens/home/HomeScreen'
+import LottieView from 'lottie-react-native'
+import CreateAccount from '../screens/login/CreateAccount'
+const TabNavigator = props => {
+  const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
   return (
-    <View>
-      <Text>TabNavigator</Text>
-    </View>
-  )
-}
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: '#000',
+          borderTopWidth: 0,
+          position: 'absolute',
+          borderRadius: 10,
+          left: 20,
+          right: 20,
+          height: scale(60),
+          bottom: 8,
+        },
+        tabBarLabelStyle: {
+          fontFamily: 'honc-Bold',
+          fontSize: 14,
+          bottom: scale(5),
+        },
+        headerShown: false,
+        tabBarActiveTintColor: '#fff',
+        tabBarInactiveTintColor: '#dada',
+      }}
+      backBehavior="none">
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          title: 'Home',
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <LottieView
+                source={require('../assets/animations/Home.json')}
+                style={{height: scale(45), width: scale(35)}}
+                autoPlay
+                loop={false}
+              />
+            ) : (
+              // <Image
+              //   source={require('../assets/images/Calendar.png')}
+              //   style={{height: scale(20), width: scale(20)}}
+              //   name="home"
+              //   color={color}
+              // />
+              <></>
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={CreateAccount}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({color, focused}) =>
+            focused ? (
+              <LottieView
+                source={require('../assets/animations/ProfileIcon.json')}
+                style={{height: scale(45), width: scale(35)}}
+                autoPlay
+                loop={false}
+              />
+            ) : (
+              // <Star height={20} fill={'#ffb100'} />
+              <></>
+            ),
+        }}
+      />
+     
+    </Tab.Navigator>
+  );
+};
 
-export default TabNavigator
-
-const styles = StyleSheet.create({})
+export default TabNavigator;
