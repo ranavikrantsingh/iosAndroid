@@ -1,13 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {scale} from '../../../utils/scaling';
+import Colors from '../../../constants/Colors';
 
 const PremiumBlock = props => {
   return (
-    <View style={styles.card}>
-      <Text style={styles.text}>Premium Block</Text>
-      <Text style={styles.labelText}>loremIpsum</Text>
-    </View>
+    <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
+      <View style={styles.card}>
+        <Text style={styles.text}>Premium Block</Text>
+        <Text style={styles.labelText}>loremIpsum</Text>
+        <View style={styles.miniSquare}></View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -31,5 +35,14 @@ const styles = StyleSheet.create({
     fontFamily: 'honc-Medium',
     fontSize: scale(16),
     lineHeight: scale(23),
+  },
+  miniSquare: {
+    backgroundColor: Colors.teal,
+    borderRadius: scale(10),
+    height: scale(30),
+    width: scale(30),
+    bottom: scale(-5),
+    right: scale(-5),
+    position: 'absolute',
   },
 });

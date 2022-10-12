@@ -13,7 +13,7 @@ import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-import {setIsAuthenticated} from '../../redux/actions';
+import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
 import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
@@ -59,6 +59,7 @@ const CreateAccount = props => {
       //   name: 'OtpScreen',
       // });
       dispatch(setIsAuthenticated(true));
+      dispatch(setUserDetails(name));
     } else {
       toastr.showToast(validation.message);
     }
