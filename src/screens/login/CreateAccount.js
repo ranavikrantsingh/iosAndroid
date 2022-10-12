@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  StatusBar,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
@@ -66,6 +67,7 @@ const CreateAccount = props => {
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
       <View style={styles.halfScreen}>
         <TouchableOpacity>
           <View style={styles.round}>
