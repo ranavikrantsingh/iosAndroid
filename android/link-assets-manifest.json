@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/digital-7.ttf",
+      "sha1": "7e1cf55ecbeaaa82465624ffb32b54e85453325c"
+    },
+    {
+      "path": "src/assets/fonts/honc-Black.ttf",
+      "sha1": "9c240ccc0953a58d3621fcd8375324f8953d8c29"
+    },
+    {
+      "path": "src/assets/fonts/honc-Bold.ttf",
+      "sha1": "62442a18a9fe9457c1afeabf683d263a691b7798"
+    },
+    {
+      "path": "src/assets/fonts/honc-ExtraBold.ttf",
+      "sha1": "33658919e4bee61891ee7d08534db2068f71e03f"
+    },
+    {
+      "path": "src/assets/fonts/honc-Heavy.ttf",
+      "sha1": "01add7b052240b051588c2d55342bdfaf9fb0f71"
+    },
+    {
+      "path": "src/assets/fonts/honc-Light.ttf",
+      "sha1": "3373a06b06b14e8a867d5e95242d29cb6085aa0d"
+    },
+    {
+      "path": "src/assets/fonts/honc-Medium.ttf",
+      "sha1": "3c6a09fcc6a454924c81af7dff94fc6d399ed79b"
+    },
+    {
+      "path": "src/assets/fonts/honc-Regular.ttf",
+      "sha1": "56c5c0d38bde4c1f1549dda43db37b09c608aad3"
+    },
+    {
+      "path": "src/assets/fonts/honc-SemiBold.ttf",
+      "sha1": "8580dec824bbdb6ce24d04d3aaf360776339f0a7"
+    },
+    {
+      "path": "src/assets/fonts/honc_bold.ttf",
+      "sha1": "333689749c2a387092f1f2dd684ce60330a7d09a"
+    },
+    {
+      "path": "src/assets/fonts/honc_bold_1.woff",
+      "sha1": "27532209a759c21182a24b17d6f808877b515438"
+    }
+  ]
+}

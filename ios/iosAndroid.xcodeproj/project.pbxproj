@@ -14,6 +14,17 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-iosAndroid-iosAndroidTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-iosAndroid-iosAndroidTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9899ED7BFB0C4CFAAA32FA4B /* digital-7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 768308B0D48C407F99863D05 /* digital-7.ttf */; };
+		EE1542016A764E1BAEEC4FA5 /* honc-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF62AB973FD64015B8A277AD /* honc-Black.ttf */; };
+		897A982090AD4C4DBCA0DAAB /* honc-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A124573A810404DB6CE8E78 /* honc-Bold.ttf */; };
+		5BBCAF0D28B14B34A6DD0331 /* honc-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2186CFC9D3BE4F8C9979D073 /* honc-ExtraBold.ttf */; };
+		1087A55B50124A3D9911329F /* honc-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73DD39199A334B5493EF3019 /* honc-Heavy.ttf */; };
+		6B7B81BEA87D493795B45766 /* honc-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60D5DFF7FD43459BB54ACD49 /* honc-Light.ttf */; };
+		34DF6796A0D34D38B4DE5B1C /* honc-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 458C88F369B544678C0BD4FC /* honc-Medium.ttf */; };
+		C59F554827FE4B2B8F76B119 /* honc-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46212858CF084E79AADE33BE /* honc-Regular.ttf */; };
+		DD359F804AA246BCB03A131A /* honc-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09B8EF3BE1F6435AB87F73BD /* honc-SemiBold.ttf */; };
+		EFD768F8E7234F7EA663266E /* honc_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BEB3C92FE6C4C7EB0FEBC45 /* honc_bold.ttf */; };
+		16D0D263F98744A0A468D638 /* honc_bold_1.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3777B3646B1A43B5B266DA18 /* honc_bold_1.woff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +55,17 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = iosAndroid/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-iosAndroid-iosAndroidTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosAndroid-iosAndroidTests.release.xcconfig"; path = "Target Support Files/Pods-iosAndroid-iosAndroidTests/Pods-iosAndroid-iosAndroidTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		768308B0D48C407F99863D05 /* digital-7.ttf */ = {isa = PBXFileReference; name = "digital-7.ttf"; path = "../src/assets/fonts/digital-7.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FF62AB973FD64015B8A277AD /* honc-Black.ttf */ = {isa = PBXFileReference; name = "honc-Black.ttf"; path = "../src/assets/fonts/honc-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7A124573A810404DB6CE8E78 /* honc-Bold.ttf */ = {isa = PBXFileReference; name = "honc-Bold.ttf"; path = "../src/assets/fonts/honc-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2186CFC9D3BE4F8C9979D073 /* honc-ExtraBold.ttf */ = {isa = PBXFileReference; name = "honc-ExtraBold.ttf"; path = "../src/assets/fonts/honc-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		73DD39199A334B5493EF3019 /* honc-Heavy.ttf */ = {isa = PBXFileReference; name = "honc-Heavy.ttf"; path = "../src/assets/fonts/honc-Heavy.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60D5DFF7FD43459BB54ACD49 /* honc-Light.ttf */ = {isa = PBXFileReference; name = "honc-Light.ttf"; path = "../src/assets/fonts/honc-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		458C88F369B544678C0BD4FC /* honc-Medium.ttf */ = {isa = PBXFileReference; name = "honc-Medium.ttf"; path = "../src/assets/fonts/honc-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		46212858CF084E79AADE33BE /* honc-Regular.ttf */ = {isa = PBXFileReference; name = "honc-Regular.ttf"; path = "../src/assets/fonts/honc-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09B8EF3BE1F6435AB87F73BD /* honc-SemiBold.ttf */ = {isa = PBXFileReference; name = "honc-SemiBold.ttf"; path = "../src/assets/fonts/honc-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8BEB3C92FE6C4C7EB0FEBC45 /* honc_bold.ttf */ = {isa = PBXFileReference; name = "honc_bold.ttf"; path = "../src/assets/fonts/honc_bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3777B3646B1A43B5B266DA18 /* honc_bold_1.woff */ = {isa = PBXFileReference; name = "honc_bold_1.woff"; path = "../src/assets/fonts/honc_bold_1.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +144,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				9CC0701163D543418DB1CA20 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +170,25 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		9CC0701163D543418DB1CA20 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				768308B0D48C407F99863D05 /* digital-7.ttf */,
+				FF62AB973FD64015B8A277AD /* honc-Black.ttf */,
+				7A124573A810404DB6CE8E78 /* honc-Bold.ttf */,
+				2186CFC9D3BE4F8C9979D073 /* honc-ExtraBold.ttf */,
+				73DD39199A334B5493EF3019 /* honc-Heavy.ttf */,
+				60D5DFF7FD43459BB54ACD49 /* honc-Light.ttf */,
+				458C88F369B544678C0BD4FC /* honc-Medium.ttf */,
+				46212858CF084E79AADE33BE /* honc-Regular.ttf */,
+				09B8EF3BE1F6435AB87F73BD /* honc-SemiBold.ttf */,
+				8BEB3C92FE6C4C7EB0FEBC45 /* honc_bold.ttf */,
+				3777B3646B1A43B5B266DA18 /* honc_bold_1.woff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +286,17 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				9899ED7BFB0C4CFAAA32FA4B /* digital-7.ttf in Resources */,
+				EE1542016A764E1BAEEC4FA5 /* honc-Black.ttf in Resources */,
+				897A982090AD4C4DBCA0DAAB /* honc-Bold.ttf in Resources */,
+				5BBCAF0D28B14B34A6DD0331 /* honc-ExtraBold.ttf in Resources */,
+				1087A55B50124A3D9911329F /* honc-Heavy.ttf in Resources */,
+				6B7B81BEA87D493795B45766 /* honc-Light.ttf in Resources */,
+				34DF6796A0D34D38B4DE5B1C /* honc-Medium.ttf in Resources */,
+				C59F554827FE4B2B8F76B119 /* honc-Regular.ttf in Resources */,
+				DD359F804AA246BCB03A131A /* honc-SemiBold.ttf in Resources */,
+				EFD768F8E7234F7EA663266E /* honc_bold.ttf in Resources */,
+				16D0D263F98744A0A468D638 /* honc_bold_1.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
