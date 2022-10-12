@@ -1,13 +1,24 @@
-import {StyleSheet, Text, View, SafeAreaView,TouchableOpacity,Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
+import {setIsAuthenticated} from '../../redux/actions';
 import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [hasNameErrors, setHasNameErrors] = useState(false);
@@ -47,6 +58,7 @@ const CreateAccount = props => {
       // props.navigation.navigate({
       //   name: 'OtpScreen',
       // });
+      dispatch(setIsAuthenticated(true));
     } else {
       toastr.showToast(validation.message);
     }
@@ -56,7 +68,12 @@ const CreateAccount = props => {
       <View style={styles.halfScreen}>
         <TouchableOpacity>
           <View style={styles.round}>
-            <LottieView source={require('../../assets/animations/Profile.json')}autoPlay autoSize style={{borderRadius:scale(100),marginTop:scale(-4)}}/>
+            <LottieView
+              source={require('../../assets/animations/Profile.json')}
+              autoPlay
+              autoSize
+              style={{borderRadius: scale(100), marginTop: scale(-4)}}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -213,13 +230,13 @@ const styles = StyleSheet.create({
   halfScreen: {
     backgroundColor: Colors.teal,
     flex: 0.6,
-    alignItems:'center',
+    alignItems: 'center',
   },
-  round:{
-    backgroundColor:'#fff',
-    alignItems:'center',
-    borderRadius:scale(100),
-    borderWidth:scale(3),
-    marginTop:'20%'
-  }
+  round: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    borderRadius: scale(100),
+    borderWidth: scale(3),
+    marginTop: '20%',
+  },
 });
