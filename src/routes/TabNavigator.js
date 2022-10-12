@@ -41,16 +41,14 @@ const TabNavigator = props => {
                 source={require('../assets/animations/Home.json')}
                 style={{height: scale(45), width: scale(35)}}
                 autoPlay
-                loop={false}
+                loop
               />
             ) : (
-              // <Image
-              //   source={require('../assets/images/Calendar.png')}
-              //   style={{height: scale(20), width: scale(20)}}
-              //   name="home"
-              //   color={color}
-              // />
-              <></>
+              <LottieView
+              source={require('../assets/animations/Home.json')}
+              style={{height: scale(45), width: scale(35)}}
+              loop={false}
+            />
             ),
         }}
       />
@@ -65,11 +63,14 @@ const TabNavigator = props => {
                 source={require('../assets/animations/ProfileIcon.json')}
                 style={{height: scale(45), width: scale(35)}}
                 autoPlay
-                loop={false}
+                loop
               />
             ) : (
-              // <Star height={20} fill={'#ffb100'} />
-              <></>
+              <LottieView
+              source={require('../assets/animations/ProfileIcon.json')}
+              style={{height: scale(45), width: scale(35)}}
+              loop={false}
+            />
             ),
         }}
       />
