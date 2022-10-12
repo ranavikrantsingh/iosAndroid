@@ -12,9 +12,14 @@ import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import DynamicButton from '../../components/DynamicButton';
 import CheckBoxSquare from '../../components/CheckBoxSquare';
+import {setMobileNumber} from '../../redux/actions';
+
 const LoginScreen = props => {
+  const dispatch = useDispatch();
+
   const [mobile, setMobile] = useState('');
   const [hasMobileErrors, setMobileErrors] = useState(false);
   const [error, seterror] = useState('');
@@ -37,6 +42,8 @@ const LoginScreen = props => {
     data.friend_phone = mobile;
     let validation = handleValidationforLogin(data);
     if (validation.isValid) {
+      dispatch(setMobileNumber(mobile));
+
       props.navigation.navigate({
         name: 'OtpScreen',
         params: {

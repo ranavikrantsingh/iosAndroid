@@ -2,9 +2,12 @@ import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 import React from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DynamicButton from '../../components/DynamicButton';
+import { connect, useDispatch, useSelector } from 'react-redux';
+
 import {scale} from '../../utils/scaling';
 const OtpScreen = props => {
-  const {contact} = props?.route?.params;
+  var contact = useSelector(state => state.appReducer.mobileNumber);
+
   var replaced = contact.replace(/^(.{2}).*(.{3}).*(.{4})$/, `$1****$3`);
 
   const handleOnLogin = () => {
