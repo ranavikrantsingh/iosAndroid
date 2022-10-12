@@ -5,6 +5,7 @@ import {scale} from '../../utils/scaling';
 import DynamicButton from '../../components/DynamicButton';
 import {useDispatch} from 'react-redux';
 import {logout} from '../../redux/actions';
+import PremiumBlock from './components/PremiumBlock';
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ const HomeScreen = props => {
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
       <View style={styles.insideContainer}>
-        <Text style={all_styles.span_18_b}>HomeScreen</Text>
+        <Text style={all_styles.span_18_b}>Hi, Rana!</Text>
+        <PremiumBlock/>
       </View>
       <DynamicButton onPress={() => dispatch(logout())}>Logout</DynamicButton>
     </SafeAreaView>

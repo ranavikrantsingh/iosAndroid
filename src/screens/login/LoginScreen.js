@@ -96,7 +96,7 @@ const LoginScreen = props => {
           }}
           theme={{
             colors: {
-              primary: Colors.pink,
+              primary: Colors.teal,
               placeholder: Colors.background,
               text: Colors.background,
               borderWidth: 1,
