@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {scale} from '../utils/scaling';
 import HomeScreen from '../screens/home/HomeScreen';
 import LottieView from 'lottie-react-native';
-import CreateAccount from '../screens/login/CreateAccount';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 import {StatusBar} from 'react-native';
 const TabNavigator = props => {
   const Tab = createBottomTabNavigator();
@@ -57,7 +57,7 @@ const TabNavigator = props => {
         />
         <Tab.Screen
           name="Profile"
-          component={CreateAccount}
+          component={ProfileScreen}
           options={{
             title: 'Profile',
             tabBarIcon: ({color, focused}) =>

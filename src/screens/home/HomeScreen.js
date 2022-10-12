@@ -1,10 +1,15 @@
-import {StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  StatusBar,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
 import all_styles from '../../styles/all_styles';
 import {scale} from '../../utils/scaling';
-import DynamicButton from '../../components/DynamicButton';
 import {useSelector, useDispatch} from 'react-redux';
-import {logout} from '../../redux/actions';
 import PremiumBlock from './components/PremiumBlock';
 
 const HomeScreen = props => {
@@ -14,14 +19,15 @@ const HomeScreen = props => {
   );
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
-      <View style={styles.insideContainer}>
-        <Text style={all_styles.span_18_b} numberOfLines={1}>
-          Hi, {user}!
-        </Text>
-        <PremiumBlock />
-      </View>
-      <DynamicButton onPress={() => dispatch(logout())}>Logout</DynamicButton>
+      <ScrollView>
+        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+        <View style={styles.insideContainer}>
+          <Text style={all_styles.span_18_b} numberOfLines={1}>
+            Hi, {user}!
+          </Text>
+          <PremiumBlock />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
