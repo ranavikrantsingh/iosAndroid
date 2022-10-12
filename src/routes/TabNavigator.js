@@ -34,7 +34,7 @@ const TabNavigator = props => {
         }}
         backBehavior="none">
         <Tab.Screen
-          name="HomeScreen"
+          name="Home"
           component={HomeScreen}
           options={{
             title: 'Home',
