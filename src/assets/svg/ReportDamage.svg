@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Group_10456" data-name="Group 10456" transform="translate(-25 -480)">
+    <g id="Button_container" data-name="Button/container" transform="translate(25 480)" fill="none" stroke="#e1706c" stroke-width="1">
+      <rect width="40" height="40" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="39" height="39" rx="3.5" fill="none"/>
+    </g>
+    <g id="Group_10413" data-name="Group 10413" transform="translate(-5000 -6932)">
+      <g id="Rectangle_3621" data-name="Rectangle 3621" transform="translate(5036.259 7423)" fill="#f26868" stroke="#fff" stroke-width="1">
+        <path d="M8.185,0h0A8.185,8.185,0,0,1,16.37,8.185v5.667a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V8.185A8.185,8.185,0,0,1,8.185,0Z" stroke="none"/>
+        <path d="M8.185.5h0A7.685,7.685,0,0,1,15.87,8.185v4.859a.307.307,0,0,1-.307.307H.807A.307.307,0,0,1,.5,13.044V8.185A7.685,7.685,0,0,1,8.185.5Z" fill="none"/>
+      </g>
+      <path id="Rectangle_3622" data-name="Rectangle 3622" d="M5.7,0h0a0,0,0,0,1,0,0V9.333a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V5.7A5.7,5.7,0,0,1,5.7,0Z" transform="translate(5038.748 7425.259)" fill="#fff"/>
+      <rect id="Rectangle_3623" data-name="Rectangle 3623" width="18.889" height="3.778" transform="translate(5035 7436.222)" fill="#f26868"/>
+    </g>
+  </g>
+</svg>

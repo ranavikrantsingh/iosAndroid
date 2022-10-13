@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Group_10458" data-name="Group 10458" transform="translate(-80 -294)">
+    <rect id="Button_container" data-name="Button/container" width="40" height="40" rx="4" transform="translate(80 294)" fill="#0181e3"/>
+    <path id="Icon_awesome-exclamation" data-name="Icon awesome-exclamation" d="M7.375,16.875A3.125,3.125,0,1,1,4.25,13.75,3.129,3.129,0,0,1,7.375,16.875ZM1.487.984l.531,10.625a.937.937,0,0,0,.936.891H5.546a.937.937,0,0,0,.936-.891L7.013.984A.938.938,0,0,0,6.077,0H2.423A.938.938,0,0,0,1.487.984Z" transform="translate(95.875 304)" fill="#fff"/>
+  </g>
+</svg>
