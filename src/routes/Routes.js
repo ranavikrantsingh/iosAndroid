@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import all_styles from '../styles/all_styles';
 import TabNavigator from './TabNavigator';
+import DrawerNavigator from './DrawerNavigator';
 const Stack = createNativeStackNavigator();
 const defaultScreenOptions = {
   headerShadowVisible: false,
@@ -17,10 +18,10 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={TabNavigator}>
+        initialRouteName={DrawerNavigator}>
         <Stack.Screen
           name="HomeScreen"
-          component={TabNavigator}
+          component={DrawerNavigator}
           options={HiddenScreenOptions}
         />
       </Stack.Navigator>

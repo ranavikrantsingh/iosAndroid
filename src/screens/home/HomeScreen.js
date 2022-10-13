@@ -24,7 +24,7 @@ const HomeScreen = props => {
         noArrow={false}
         text={moment().format('MMM DD, YYYY')}
         onBellPress={() => props.navigation.navigate('Notifications')}
-        onPress={() => props.navigation.navigate('Profile')}
+        onPress={() => props.navigation.toggleDrawer()}
       />
       <ScrollView>
         <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
