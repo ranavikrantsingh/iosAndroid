@@ -13,7 +13,9 @@ const PremiumBlock = props => {
       <View style={styles.card}>
         <Text style={styles.text}>✪ For Gated Communities</Text>
         <Text style={styles.labelText}>loremIpsum</Text>
-        <View style={styles.miniSquare}></View>
+        <View style={styles.miniSquare}>
+        <Icon name="rocket" size={30} color="#900" />
+        </View>
       </View>
     </TouchableOpacity>
   );
