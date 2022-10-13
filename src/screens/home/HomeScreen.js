@@ -10,8 +10,9 @@ import React, {useState} from 'react';
 import all_styles from '../../styles/all_styles';
 import {scale} from '../../utils/scaling';
 import {useSelector, useDispatch} from 'react-redux';
+import Header from '../../components/Header';
 import PremiumBlock from './components/PremiumBlock';
-
+import moment from 'moment';
 const HomeScreen = props => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(
@@ -19,10 +20,16 @@ const HomeScreen = props => {
   );
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <Header
+        noArrow={false}
+        text={moment().format('MMM DD, YYYY')}
+        onBellPress={() => props.navigation.navigate('Notifications')}
+        onPress={() => props.navigation.navigate('Profile')}
+      />
       <ScrollView>
         <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
         <View style={styles.insideContainer}>
-          <Text style={all_styles.span_18_b} numberOfLines={1}>
+          <Text style={all_styles.span_20_b} numberOfLines={1}>
             Hi, {user}!
           </Text>
           <PremiumBlock />

@@ -128,7 +128,7 @@ export default NewHeader = props => {
               /> */}
               <LottieView
                 style={styles.icon_2}
-                source={require('../assets/animations/Profile.json')}
+                source={require('../assets/animations/hamburger.json')}
                 progress={animate}
               />
             </TouchableWithoutFeedback>
