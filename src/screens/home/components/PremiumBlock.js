@@ -2,16 +2,18 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {scale} from '../../../utils/scaling';
 import Colors from '../../../constants/Colors';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const PremiumBlock = props => {
   return (
-    <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      disabled={props.disabled}
+      activeOpacity={0.9}>
       <View style={styles.card}>
         <Text style={styles.text}>✪ For Gated Communities</Text>
         <Text style={styles.labelText}>loremIpsum</Text>
-        <View style={styles.miniSquare}>
-          
-        </View>
+        <View style={styles.miniSquare}></View>
       </View>
     </TouchableOpacity>
   );
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     color: '#ebebeb',
     fontFamily: 'honc-Medium',
     fontSize: scale(16),
-    marginHorizontal:scale(17),
+    marginHorizontal: scale(17),
     lineHeight: scale(23),
   },
   miniSquare: {
