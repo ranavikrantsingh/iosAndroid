@@ -122,10 +122,6 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleMenu}
               onPress={props.onPress}>
-              {/* <Hamburger
-                style={styles.icon_2}
-                fill={props.fill ? props.fill : '#000000'}
-              /> */}
               <LottieView
                 style={styles.icon_2}
                 source={require('../assets/animations/hamburger.json')}
