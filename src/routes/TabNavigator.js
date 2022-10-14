@@ -35,7 +35,7 @@ const TabNavigator = props => {
         }}
         backBehavior="none">
         <Tab.Screen
-          name="Home"
+          name="DrawerNavigator"
           component={DrawerNavigator}
           options={{
             title: 'Home',

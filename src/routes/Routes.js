@@ -22,7 +22,7 @@ export default function Routes() {
         screenOptions={defaultScreenOptions}
         initialRouteName={TabNavigator}>
         <Stack.Screen
-          name="HomeScreen"
+          name="TabNavigator"
           component={TabNavigator}
           options={HiddenScreenOptions}
         />
