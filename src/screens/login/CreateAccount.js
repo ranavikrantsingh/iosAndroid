@@ -12,7 +12,7 @@ import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
 import LottieView from 'lottie-react-native';

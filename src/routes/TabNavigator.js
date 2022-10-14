@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {scale} from '../utils/scaling';
-import HomeScreen from '../screens/home/HomeScreen';
+import OrdersScreen from '../screens/orders/OrdersScreen';
 import LottieView from 'lottie-react-native';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import {StatusBar} from 'react-native';
@@ -34,6 +34,28 @@ const TabNavigator = props => {
           tabBarInactiveTintColor: '#dada',
         }}
         backBehavior="none">
+          <Tab.Screen
+          name="OrdersScreen"
+          component={OrdersScreen}
+          options={{
+            title: 'Orders',
+            tabBarIcon: ({color, focused}) =>
+              focused ? (
+                <LottieView
+                  source={require('../assets/animations/Cart.json')}
+                  style={{height: scale(45), width: scale(35)}}
+                  autoPlay
+                  loop
+                />
+              ) : (
+                <LottieView
+                  source={require('../assets/animations/CartActive.json')}
+                  style={{height: scale(45), width: scale(35)}}
+                  loop={false}
+                />
+              ),
+          }}
+        />
         <Tab.Screen
           name="DrawerNavigator"
           component={DrawerNavigator}
