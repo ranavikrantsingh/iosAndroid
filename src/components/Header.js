@@ -13,6 +13,8 @@ import Hamburger from '../assets/svg/Hamburger.svg';
 import {scale} from '../utils/scaling';
 import Colors from '../constants/Colors';
 import LottieView from 'lottie-react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+
 export default NewHeader = props => {
   const progress = useRef(new Animated.Value(0)).current;
   const animate = useRef(new Animated.Value(0)).current;
@@ -122,11 +124,7 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleMenu}
               onPress={props.onPress}>
-              <LottieView
-                style={styles.icon_2}
-                source={require('../assets/animations/hamburger.json')}
-                progress={animate}
-              />
+              <Icon name="menu" size={25} color="#000"/>
             </TouchableWithoutFeedback>
             <View style={styles.dateContainer}>
               <Text
