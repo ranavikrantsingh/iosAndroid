@@ -72,6 +72,7 @@ const CustomDrawerComponent = props => {
           />
         </View>
       </DrawerContentScrollView>
+      <View style={{top:scale(-100)}}>
       <DrawerItem
         label="Logout"
         activeTintColor={Colors.accent}
@@ -102,6 +103,7 @@ const CustomDrawerComponent = props => {
           )
         }
       />
+      </View>
     </View>
   );
 };

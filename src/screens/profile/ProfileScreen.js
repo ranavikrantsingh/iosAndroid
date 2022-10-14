@@ -11,16 +11,24 @@ import React, {useState} from 'react';
 import {scale} from '../../utils/scaling';
 import {useSelector, useDispatch} from 'react-redux';
 import all_styles from '../../styles/all_styles';
+import {useIsFocused} from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 const ProfileScreen = props => {
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
   );
   const dispatch = useDispatch();
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
 
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
   return (
     <>
-      <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
+      <FocusAwareStatusBar
+        backgroundColor={Colors.teal}
+        barStyle={'light-content'}
+      />
       <View style={styles.tealBackground}></View>
       <View style={styles.whiteBackground}>
         <Text style={all_styles.span_30_b}>Hi {user}</Text>

@@ -13,13 +13,21 @@ import {useSelector, useDispatch} from 'react-redux';
 import Header from '../../components/Header';
 import PremiumBlock from './components/PremiumBlock';
 import moment from 'moment';
+import {useIsFocused} from '@react-navigation/native';
 const HomeScreen = props => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
   );
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
+
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <FocusAwareStatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+
       <Header
         noArrow={false}
         text={moment().format('MMM DD, YYYY')}
@@ -27,7 +35,6 @@ const HomeScreen = props => {
         onPress={() => props.navigation.toggleDrawer()}
       />
       <ScrollView>
-        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
         <View style={styles.insideContainer}>
           <Text style={all_styles.span_20_b} numberOfLines={1}>
             Hi, {user}!
