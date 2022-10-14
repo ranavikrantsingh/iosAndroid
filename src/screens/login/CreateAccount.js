@@ -87,7 +87,6 @@ const CreateAccount = props => {
           label="Name"
           value={name}
           error={hasNameErrors}
-          keyboardType={'number-pad'}
           maxLength={30}
           returnKeyType={'done'}
           onChangeText={name => {
@@ -145,7 +144,6 @@ const CreateAccount = props => {
           label="Email"
           value={email}
           error={hasEmailErrors}
-          keyboardType={'number-pad'}
           returnKeyType={'done'}
           onChangeText={email => {
             email.replace(/\s/g, '');
