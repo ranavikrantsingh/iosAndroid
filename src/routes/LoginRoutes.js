@@ -21,7 +21,7 @@ export default function Routes(props) {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={'OnBoardingScreen'}>
+        initialRouteName={'Login'}>
         <Stack.Screen
           name="OnBoardingScreen"
           component={OnBoardingScreen}
@@ -30,12 +30,12 @@ export default function Routes(props) {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{title: 'Login'}}
+          options={HiddenScreenOptions}
         />
         <Stack.Screen
           name="OtpScreen"
           component={OtpScreen}
-          options={{title: 'Login'}}
+          options={HiddenScreenOptions}
         />
         <Stack.Screen
           name="CreateAccount"

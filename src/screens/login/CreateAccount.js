@@ -12,9 +12,9 @@ import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
+import {setIsAuthenticated, setUserDetails,switchMode} from '../../redux/actions';
 import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
@@ -24,6 +24,14 @@ const CreateAccount = props => {
   const [email, setEmail] = useState('');
   const [hasNameErrors, setHasNameErrors] = useState(false);
   const [hasEmailErrors, sethasEmailErrors] = useState(false);
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+ 
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   const [error, seterror] = useState('');
   const handleValidationforAccount = input => {
     let output = {};
@@ -66,7 +74,7 @@ const CreateAccount = props => {
     }
   };
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <SafeAreaView style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
       <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
       <View style={styles.halfScreen}>
         <TouchableOpacity>
@@ -81,7 +89,7 @@ const CreateAccount = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.insideContainer}>
-        <Text style={styles.belowText}>Please enter your details.</Text>
+        <Text style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>Please enter your details.</Text>
         <TextInput
           mode="flat"
           label="Name"
@@ -112,9 +120,9 @@ const CreateAccount = props => {
           }}
           theme={{
             colors: {
-              primary: Colors.background,
-              placeholder: Colors.background,
-              text: Colors.background,
+              primary: mode == 'dark' ? Colors.teal : Colors.teal,
+              placeholder: mode == 'dark' ? Colors.teal : Colors.background,
+              text: mode == 'dark' ? Colors.secondary : Colors.background,
               borderWidth: 1,
               fontFamily: 'honc-Medium',
             },
@@ -129,14 +137,9 @@ const CreateAccount = props => {
               },
             },
           }}
-          style={[
-            all_styles.span_13,
-            {
-              height: scale(50),
-              marginTop: scale(-5),
-              backgroundColor: Colors.secondary,
-            },
-          ]}
+          style={
+            mode == 'dark' ? styles.darkModeTextInput : styles.textInputStyle
+          }
         />
 
         <TextInput
@@ -169,9 +172,9 @@ const CreateAccount = props => {
           }}
           theme={{
             colors: {
-              primary: Colors.background,
-              placeholder: Colors.background,
-              text: Colors.background,
+              primary: mode == 'dark' ? Colors.teal : Colors.teal,
+              placeholder: mode == 'dark' ? Colors.teal : Colors.background,
+              text: mode == 'dark' ? Colors.secondary : Colors.background,
               borderWidth: 1,
               fontFamily: 'honc-Medium',
             },
@@ -186,13 +189,9 @@ const CreateAccount = props => {
               },
             },
           }}
-          style={[
-            all_styles.span_13,
-            {
-              height: scale(50),
-              backgroundColor: Colors.secondary,
-            },
-          ]}
+          style={
+            mode == 'dark' ? styles.darkModeTextInput : styles.textInputStyle
+          }
         />
 
         <DynamicButton onPress={() => handleCreateAccount()}>
@@ -210,27 +209,63 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  darkModeContainer: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
   insideContainer: {
     marginHorizontal: scale(23),
     marginTop: '20%',
-    borderTopLeftRadius: scale(20),
-    borderTopRightRadius: scale(20),
+    flex: 1,
   },
   welcomeText: {
     fontSize: scale(30),
     fontFamily: 'honc-Bold',
-    color:'#000',
+    color: '#000',
     paddingVertical: scale(20),
+  },
+  darkmodeWelcomeText: {
+    fontSize: scale(30),
+    fontFamily: 'honc-Bold',
+    color: '#fff',
+    paddingVertical: scale(20),
+  },
+  darkModebelowText: {
+    fontSize: scale(16),
+    fontFamily: 'honc-Medium',
+    color: '#fff',
+    paddingBottom: scale(13),
   },
   belowText: {
     fontSize: scale(16),
     fontFamily: 'honc-Medium',
-    color:'#000',
+    color: '#000',
     paddingBottom: scale(13),
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  darktermsText: {
+    fontFamily: 'honc-Medium',
+    fontSize: 14,
+    color: '#fff',
+  },
+  termsText: {
+    fontFamily: 'honc-Medium',
+    fontSize: 14,
+    color: '#000',
+  },
+  darkModeTextInput: {
+    height: scale(50),
+    marginTop: scale(-5),
+    backgroundColor: 'transparent',
+  },
+
+  textInputStyle: {
+    height: scale(50),
+    marginTop: scale(-5),
+    backgroundColor: Colors.secondary,
   },
   halfScreen: {
     backgroundColor: Colors.teal,

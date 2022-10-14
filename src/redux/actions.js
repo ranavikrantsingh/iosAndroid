@@ -6,6 +6,7 @@ import {
   SET_USER_DETAILS,
   SET_IS_AUTHENTICATED,
   SET_LOGOUT,
+  THEME_CHANGE,
 } from './methods';
 
 export const setOtpToken = otpToken => dispatch => {
@@ -46,6 +47,12 @@ export const setIsAuthenticated = isAuthenticated => dispatch => {
   });
 };
 
+export const switchMode = mode => {
+  return {
+    type: THEME_CHANGE,
+    payload: mode,
+  };
+};
 export const logout = () => dispatch => {
   dispatch({
     type: SET_LOGOUT,

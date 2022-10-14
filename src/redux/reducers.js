@@ -6,6 +6,7 @@ import {
   SET_USER_DETAILS,
   SET_IS_AUTHENTICATED,
   SET_LOGOUT,
+  THEME_CHANGE
 } from './methods';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   deviceId: '',
   user: {},
   isAuthenticated: false,
+  mode: 'light',
 };
 
 function appReducer(state = initialState, action) {
@@ -35,6 +37,11 @@ function appReducer(state = initialState, action) {
 
     case SET_LOGOUT:
       return {...initialState};
+    case THEME_CHANGE:
+      return {
+        ...state,
+        mode: action.payload,
+      };
     default:
       return state;
   }
