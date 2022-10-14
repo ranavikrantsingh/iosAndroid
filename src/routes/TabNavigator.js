@@ -6,6 +6,8 @@ import LottieView from 'lottie-react-native';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import {StatusBar} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import WalletIcon from 'react-native-vector-icons/FontAwesome5'
 const TabNavigator = props => {
   const Tab = createBottomTabNavigator();
 
@@ -17,21 +19,21 @@ const TabNavigator = props => {
           tabBarStyle: {
             backgroundColor: '#000',
             borderTopWidth: 0,
-            position: 'absolute',
-            borderRadius: 10,
-            left: 20,
-            right: 20,
+            // position: 'absolute',
+            // borderRadius: scale(200),
+            // left: 20,
+            // right: 20,
             height: scale(60),
-            bottom: 8,
+            // bottom: 8,
           },
           tabBarLabelStyle: {
             fontFamily: 'honc-Bold',
-            fontSize: 14,
+            fontSize: 13,
             bottom: scale(5),
           },
           headerShown: false,
-          tabBarActiveTintColor: '#fff',
-          tabBarInactiveTintColor: '#dada',
+          tabBarActiveTintColor: '#ffb800',
+          tabBarInactiveTintColor: '#6d6d6d',
         }}
         backBehavior="none"
         initialRouteName='DrawerNavigator'>
@@ -43,17 +45,14 @@ const TabNavigator = props => {
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
-                  source={require('../assets/animations/Cart.json')}
-                  style={{height: scale(45), width: scale(35)}}
+                  source={require('../assets/animations/CartActive.json')}
+                  style={{height: scale(40), width: scale(35)}}
                   autoPlay
                   loop
                 />
               ) : (
-                <LottieView
-                  source={require('../assets/animations/CartActive.json')}
-                  style={{height: scale(45), width: scale(35)}}
-                  loop={false}
-                />
+                <Icon name="opencart" size={20} color="#fff" />
+
               ),
           }}
         />
@@ -66,16 +65,13 @@ const TabNavigator = props => {
               focused ? (
                 <LottieView
                   source={require('../assets/animations/Home.json')}
-                  style={{height: scale(45), width: scale(35)}}
+                  style={{height: scale(50), width: scale(35)}}
                   autoPlay
                   loop
                 />
               ) : (
-                <LottieView
-                  source={require('../assets/animations/Home.json')}
-                  style={{height: scale(45), width: scale(35)}}
-                  loop={false}
-                />
+                <Icon name="home" size={20} color="#fff" />
+
               ),
           }}
         />
@@ -87,17 +83,33 @@ const TabNavigator = props => {
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
-                  source={require('../assets/animations/ProfileIcon.json')}
-                  style={{height: scale(45), width: scale(35)}}
+                  source={require('../assets/animations/BarChart.json')}
+                  style={{height: scale(40), width: scale(35)}}
+                  autoPlay
+                  loop
+                />
+
+              ) : (
+                <Icon name="bar-chart-o" size={20} color="#fff" />
+
+              ),
+          }}
+        />
+        <Tab.Screen
+          name="Wallet"
+          component={ProfileScreen}
+          options={{
+            title: 'Profile',
+            tabBarIcon: ({color, focused}) =>
+              focused ? (
+                <LottieView
+                  source={require('../assets/animations/Wallet.json')}
+                  style={{height: scale(40), width: scale(35)}}
                   autoPlay
                   loop
                 />
               ) : (
-                <LottieView
-                  source={require('../assets/animations/ProfileIcon.json')}
-                  style={{height: scale(45), width: scale(35)}}
-                  loop={false}
-                />
+                <WalletIcon name="wallet" size={20} color="#fff" />
               ),
           }}
         />
