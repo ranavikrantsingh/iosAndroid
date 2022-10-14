@@ -58,19 +58,17 @@ const CustomDrawerComponent = props => {
             inactiveTintColor="white"
             inactiveBackgroundColor="#000"
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
-              onPress={() =>
-                props.navigation.navigate('Profile')
-              }
+            onPress={() => props.navigation.navigate('Profile')}
           />
           <DrawerItem
-            label="My Jobs"
+            label="My Orders"
             activeTintColor={Colors.accent}
             activeBackgroundColor="white"
             labelStyle={[all_styles.span_16_m, {color: '#fff'}]}
             inactiveTintColor="white"
             inactiveBackgroundColor="transparent"
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
-            onPress={() => props.navigation.navigate('LoginMatched')}
+            onPress={() => props.navigation.navigate('Orders')}
           />
         </View>
       </DrawerContentScrollView>
