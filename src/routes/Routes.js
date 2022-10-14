@@ -20,10 +20,10 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={DrawerNavigator}>
+        initialRouteName={TabNavigator}>
         <Stack.Screen
           name="HomeScreen"
-          component={DrawerNavigator}
+          component={TabNavigator}
           options={HiddenScreenOptions}
         />
          <Stack.Screen

@@ -5,6 +5,7 @@ import HomeScreen from '../screens/home/HomeScreen';
 import LottieView from 'lottie-react-native';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import {StatusBar} from 'react-native';
+import DrawerNavigator from './DrawerNavigator';
 const TabNavigator = props => {
   const Tab = createBottomTabNavigator();
 
@@ -35,7 +36,7 @@ const TabNavigator = props => {
         backBehavior="none">
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={DrawerNavigator}
           options={{
             title: 'Home',
             tabBarIcon: ({color, focused}) =>
