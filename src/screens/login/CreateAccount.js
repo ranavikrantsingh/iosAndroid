@@ -264,7 +264,6 @@ const styles = StyleSheet.create({
 
   textInputStyle: {
     height: scale(50),
-    marginTop: scale(-5),
     backgroundColor: Colors.secondary,
   },
   halfScreen: {

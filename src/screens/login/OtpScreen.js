@@ -1,7 +1,6 @@
 import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 import React,{useState,useEffect} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import { switchMode } from '../../redux/actions';
 import DynamicButton from '../../components/DynamicButton';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';

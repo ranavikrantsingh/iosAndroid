@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState,useEffect} from 'react';
 import {
   Text,
   View,
@@ -9,19 +9,24 @@ import {
 } from 'react-native';
 import {Button} from 'native-base';
 import BackNew from '../assets/svg/BackNew.svg';
-import Hamburger from '../assets/svg/Hamburger.svg';
+import { useSelector,useDispatch } from 'react-redux';
 import {scale} from '../utils/scaling';
 import Colors from '../constants/Colors';
 import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default NewHeader = props => {
+  const dispatch = useDispatch()
   const progress = useRef(new Animated.Value(0)).current;
   const animate = useRef(new Animated.Value(0)).current;
 
   const [show, setShow] = useState(false);
   const [menuAnimation, setmenuAnimation] = useState(false);
-
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   const handleAnimation = () => {
     const newValue = show ? 0 : 1;
 
@@ -57,10 +62,8 @@ export default NewHeader = props => {
               alignItems: 'center',
             }}>
             <Button style={styles.closeIcon} onPress={props.onPress}>
-              <BackNew
-                style={styles.icon_2}
-                fill={props.fill ? props.fill : '#000000'}
-              />
+            <Icon name="menu" size={25} color={mode == 'dark'? '#fff':'#000'}/>
+
             </Button>
             <Text
               style={[
@@ -124,7 +127,7 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleMenu}
               onPress={props.onPress}>
-              <Icon name="menu" size={25} color="#000"/>
+              <Icon name="menu" size={25} color={mode == 'dark'? '#fff':'#000'}/>
             </TouchableWithoutFeedback>
             <View style={styles.dateContainer}>
               <Text
@@ -144,11 +147,8 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleAnimation}
               onPress={props.onBellPress}>
-              <LottieView
-                style={styles.icon_2}
-                source={require('../assets/animations/bell_black.json')}
-                progress={progress}
-              />
+                            <Icon name="bell" size={25} color={mode == 'dark'? '#fff':'#000'}/>
+
             </TouchableWithoutFeedback>
           </View>
         ) : (
@@ -184,10 +184,8 @@ const CloseHeader = props => (
         marginLeft: scale(10),
       }}>
       <Button style={styles.closeIcon} onPress={props.onPress}>
-        <BackNew
-          style={styles.icon_2}
-          fill={props.fill ? props.fill : '#000000'}
-        />
+      <Icon name="back" size={25} color={mode == 'dark'? '#fff':'#000'}/>
+
       </Button>
       <Text
         style={[

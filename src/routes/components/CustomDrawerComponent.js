@@ -6,7 +6,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {scale} from '../../utils/scaling';
 import {
   DrawerContentScrollView,
@@ -15,15 +15,25 @@ import {
 } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../../constants/Colors';
-import {logout} from '../../redux/actions';
+import {logout, switchMode} from '../../redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import all_styles from '../../styles/all_styles';
 const CustomDrawerComponent = props => {
+  const dispatch = useDispatch();
   const [data, setData] = useState('');
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
   );
-  const dispatch = useDispatch();
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+  const handleThemeChange = () => {
+    dispatch(switchMode(theme.mode === 'light' ? 'dark' : 'light'));
+  };
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
 
   return (
     <View style={{flex: 1}}>
@@ -70,39 +80,49 @@ const CustomDrawerComponent = props => {
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
             onPress={() => props.navigation.navigate('Orders')}
           />
+          <DrawerItem
+            label={mode == 'dark' ?"Enable light Mode" :"Enable Dark Mode"}
+            activeTintColor={Colors.accent}
+            activeBackgroundColor="white"
+            labelStyle={[all_styles.span_16_m, {color: '#fff'}]}
+            inactiveTintColor="white"
+            inactiveBackgroundColor="transparent"
+            style={{backgroundColor: 'transparent', marginTop: '0%'}}
+            onPress={() => handleThemeChange()}
+          />
         </View>
       </DrawerContentScrollView>
       <View>
-      <DrawerItem
-        label="Logout"
-        activeTintColor={Colors.accent}
-        activeBackgroundColor="white"
-        inactiveTintColor="white"
-        labelStyle={[all_styles.span_16_m, {color: '#fff'}]}
-        inactiveBackgroundColor="transparent"
-        onPress={() =>
-          Alert.alert(
-            'Log out',
-            'Do you want to logout?',
-            [
-              {
-                text: 'Cancel',
-                onPress: () => {
-                  return null;
+        <DrawerItem
+          label="Logout"
+          activeTintColor={Colors.accent}
+          activeBackgroundColor="white"
+          inactiveTintColor="white"
+          labelStyle={[all_styles.span_16_m, {color: '#fff'}]}
+          inactiveBackgroundColor="transparent"
+          onPress={() =>
+            Alert.alert(
+              'Log out',
+              'Do you want to logout?',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => {
+                    return null;
+                  },
                 },
-              },
-              {
-                text: 'Confirm',
-                onPress: () => {
-                  AsyncStorage.clear();
-                  dispatch(logout());
+                {
+                  text: 'Confirm',
+                  onPress: () => {
+                    AsyncStorage.clear();
+                    dispatch(logout());
+                  },
                 },
-              },
-            ],
-            {cancelable: false},
-          )
-        }
-      />
+              ],
+              {cancelable: false},
+            )
+          }
+        />
       </View>
     </View>
   );

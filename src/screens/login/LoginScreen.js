@@ -157,9 +157,7 @@ const LoginScreen = props => {
           </Pressable>
         </View>
         <DynamicButton onPress={() => handleLogin()}>Proceed</DynamicButton>
-        <DynamicButton onPress={() => handleThemeChange()}>
-          Change dark mode
-        </DynamicButton>
+       
       </View>
     </SafeAreaView>
   );
