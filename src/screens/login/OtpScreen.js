@@ -2,7 +2,7 @@ import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 import React from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DynamicButton from '../../components/DynamicButton';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 
 import {scale} from '../../utils/scaling';
 const OtpScreen = props => {
@@ -48,10 +48,14 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: scale(30),
+    fontFamily: 'honc-Bold',
+    color: '#000',
     paddingVertical: scale(20),
   },
   belowText: {
     fontSize: scale(16),
+    fontFamily: 'honc-Medium',
+    color: '#000',
     paddingBottom: scale(13),
   },
   row: {

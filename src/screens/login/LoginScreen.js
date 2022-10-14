@@ -12,7 +12,7 @@ import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import Colors from '../../constants/Colors';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import DynamicButton from '../../components/DynamicButton';
 import CheckBoxSquare from '../../components/CheckBoxSquare';
 import {setMobileNumber} from '../../redux/actions';
@@ -43,7 +43,7 @@ const LoginScreen = props => {
     let validation = handleValidationforLogin(data);
     if (validation.isValid) {
       dispatch(setMobileNumber(mobile));
-
+toastr.showToast('Success')
       props.navigation.navigate({
         name: 'OtpScreen',
         params: {
@@ -163,10 +163,14 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: scale(30),
+    fontFamily: 'honc-Bold',
+    color:'#000',
     paddingVertical: scale(20),
   },
   belowText: {
     fontSize: scale(16),
+    fontFamily: 'honc-Medium',
+    color:'#000',
     paddingBottom: scale(13),
   },
   row: {

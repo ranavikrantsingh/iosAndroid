@@ -218,10 +218,14 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     fontSize: scale(30),
+    fontFamily: 'honc-Bold',
+    color:'#000',
     paddingVertical: scale(20),
   },
   belowText: {
     fontSize: scale(16),
+    fontFamily: 'honc-Medium',
+    color:'#000',
     paddingBottom: scale(13),
   },
   row: {
