@@ -9,11 +9,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {scale} from '../../utils/scaling';
-import {useSelector,useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import all_styles from '../../styles/all_styles';
-import {logout} from '../../redux/actions';
 import Colors from '../../constants/Colors';
-import DynamicButton from '../../components/DynamicButton';
 const ProfileScreen = props => {
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
@@ -26,8 +24,6 @@ const ProfileScreen = props => {
       <View style={styles.tealBackground}></View>
       <View style={styles.whiteBackground}>
         <Text style={all_styles.span_30_b}>Hi {user}</Text>
-        <DynamicButton onPress={() => dispatch(logout())}>Logout</DynamicButton>
-
       </View>
     </>
   );
@@ -46,7 +42,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: scale(0),
     elevation: 4,
-    height:'50%',
+    height: '50%',
     paddingHorizontal: scale(23),
     width: '100%',
     borderTopRightRadius: scale(20),
