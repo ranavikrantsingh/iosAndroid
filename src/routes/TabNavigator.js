@@ -7,7 +7,7 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import {StatusBar} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import WalletIcon from 'react-native-vector-icons/FontAwesome5'
+import WalletIcon from 'react-native-vector-icons/FontAwesome5';
 const TabNavigator = props => {
   const Tab = createBottomTabNavigator();
 
@@ -32,12 +32,12 @@ const TabNavigator = props => {
             bottom: scale(5),
           },
           headerShown: false,
-          tabBarActiveTintColor: '#ffb800',
+          tabBarActiveTintColor: '#f2f2f2',
           tabBarInactiveTintColor: '#6d6d6d',
         }}
         backBehavior="none"
-        initialRouteName='DrawerNavigator'>
-          <Tab.Screen
+        initialRouteName="DrawerNavigator">
+        <Tab.Screen
           name="OrdersScreen"
           component={OrdersScreen}
           options={{
@@ -52,7 +52,6 @@ const TabNavigator = props => {
                 />
               ) : (
                 <Icon name="opencart" size={20} color="#fff" />
-
               ),
           }}
         />
@@ -71,7 +70,6 @@ const TabNavigator = props => {
                 />
               ) : (
                 <Icon name="home" size={20} color="#fff" />
-
               ),
           }}
         />
@@ -88,10 +86,8 @@ const TabNavigator = props => {
                   autoPlay
                   loop
                 />
-
               ) : (
                 <Icon name="bar-chart-o" size={20} color="#fff" />
-
               ),
           }}
         />
