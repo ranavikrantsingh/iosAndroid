@@ -33,7 +33,8 @@ const TabNavigator = props => {
           tabBarActiveTintColor: '#fff',
           tabBarInactiveTintColor: '#dada',
         }}
-        backBehavior="none">
+        backBehavior="none"
+        initialRouteName='DrawerNavigator'>
           <Tab.Screen
           name="OrdersScreen"
           component={OrdersScreen}
