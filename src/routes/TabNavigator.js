@@ -77,7 +77,7 @@ const TabNavigator = props => {
           name="Profile"
           component={ProfileScreen}
           options={{
-            title: 'Profile',
+            title: 'Analytics',
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
@@ -95,7 +95,7 @@ const TabNavigator = props => {
           name="Wallet"
           component={ProfileScreen}
           options={{
-            title: 'Profile',
+            title: 'Wallet',
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
