@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import DynamicButton from '../../components/DynamicButton';
 import CheckBoxSquare from '../../components/CheckBoxSquare';
 import {setMobileNumber, switchMode} from '../../redux/actions';
+import {useIsFocused} from '@react-navigation/native';
 
 const LoginScreen = props => {
   const dispatch = useDispatch();
@@ -24,11 +25,12 @@ const LoginScreen = props => {
   const handleThemeChange = () => {
     dispatch(switchMode(theme.mode === 'light' ? 'dark' : 'light'));
   };
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
 
-  // Update the app Incase the theme mode changes
-  useEffect(() => {
-    setMode(theme.mode);
-  }, [theme]);
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
+
   const [mobile, setMobile] = useState('');
   const [hasMobileErrors, setMobileErrors] = useState(false);
   const [error, seterror] = useState('');
@@ -63,10 +65,17 @@ const LoginScreen = props => {
       seterror('*this field is required');
     }
   };
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
-      <StatusBar backgroundColor={'#fff'} barStyle={'#fff'} animated={true} />
+      <FocusAwareStatusBar
+        backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
+        barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
+      />
       <View style={styles.insideContainer}>
         <Text
           style={
@@ -157,7 +166,7 @@ const LoginScreen = props => {
           </Pressable>
         </View>
         <DynamicButton onPress={() => handleLogin()}>Proceed</DynamicButton>
-       
+
       </View>
     </SafeAreaView>
   );

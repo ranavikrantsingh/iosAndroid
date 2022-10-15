@@ -1,10 +1,12 @@
-import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
+import {StyleSheet, View, Text, SafeAreaView,StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DynamicButton from '../../components/DynamicButton';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {scale} from '../../utils/scaling';
+import {useIsFocused} from '@react-navigation/native';
+
 const OtpScreen = props => {
   const dispatch = useDispatch();
   var contact = useSelector(state => state.appReducer.mobileNumber);
@@ -12,7 +14,11 @@ const OtpScreen = props => {
   var replaced = contact.replace(/^(.{2}).*(.{3}).*(.{4})$/, `$1****$3`);
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
 
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
   // Update the app Incase the theme mode changes
   useEffect(() => {
     setMode(theme.mode);
@@ -23,6 +29,10 @@ const OtpScreen = props => {
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
+         <FocusAwareStatusBar
+        backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
+        barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
+      />
       <View style={styles.insideContainer}>
         <Text
           style={

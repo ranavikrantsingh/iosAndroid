@@ -169,7 +169,7 @@ const OnBoardingScreen = props => {
   };
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar hidden />
+      <StatusBar translucent={true} backgroundColor="transparent" />
       <Backdrop scrollX={scrollX} />
       <Square scrollX={scrollX} />
       <Animated.FlatList

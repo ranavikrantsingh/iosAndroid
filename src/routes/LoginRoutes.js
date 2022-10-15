@@ -21,7 +21,7 @@ export default function Routes(props) {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={'Login'}>
+        initialRouteName={'OnBoardingScreen'}>
         <Stack.Screen
           name="OnBoardingScreen"
           component={OnBoardingScreen}
