@@ -48,13 +48,23 @@ const CustomDrawerComponent = props => {
               uri: 'https://i.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8',
             }}
             style={styles.bg}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
               <Image
                 source={{uri: data.profileImage}}
                 style={styles.profileImage}
               />
-              <View style={{marginLeft: scale(1)}}>
-                <Text style={styles.label}>{user}</Text>
+              <View style={{marginLeft: scale(1), flex: 1}}>
+                <Text style={styles.label} numberOfLines={1}>
+                  {user}
+                </Text>
+              </View>
+              <View>
+                <DarkModeSwitch onPress={() => handleThemeChange()} />
               </View>
             </View>
           </ImageBackground>
@@ -94,8 +104,6 @@ const CustomDrawerComponent = props => {
         </View>
       </DrawerContentScrollView>
       <View>
-        <DarkModeSwitch onPress={() => handleThemeChange()} />
-
         <DrawerItem
           label="Logout"
           activeTintColor={Colors.accent}
