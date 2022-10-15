@@ -6,7 +6,7 @@ import { useIsFocused } from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 import { CloseHeader } from '../../components/Header';
 import all_styles from '../../styles/all_styles';
-const WalletScreen = () => {
+const WalletScreen = (props) => {
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
   );
@@ -26,7 +26,7 @@ const WalletScreen = () => {
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
         <CloseHeader
       text="Wallet"
-      onPress={()=>props.navigation.goBack()}
+      onPress={()=>props.navigation.navigate('DrawerNavigator')}
       fill={mode == 'dark' ? '#121212' : '#fff'}
       />
       <FocusAwareStatusBar

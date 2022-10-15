@@ -30,7 +30,7 @@ const OrdersScreen = (props) => {
       />
       <CloseHeader
       text="Orders"
-      onPress={()=>props.navigation.goBack()}
+      onPress={()=>props.navigation.navigate('DrawerNavigator')}
       fill={mode == 'dark' ? '#121212' : '#fff'}
       />
       </SafeAreaView>
