@@ -6,7 +6,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {scale} from '../../utils/scaling';
 import {
   DrawerContentScrollView,
@@ -16,6 +16,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../../constants/Colors';
 import {logout, switchMode} from '../../redux/actions';
+import DarkModeSwitch from '../../components/DarkModeSwitch';
 import {useDispatch, useSelector} from 'react-redux';
 import all_styles from '../../styles/all_styles';
 const CustomDrawerComponent = props => {
@@ -80,7 +81,7 @@ const CustomDrawerComponent = props => {
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
             onPress={() => props.navigation.navigate('Orders')}
           />
-          <DrawerItem
+          {/* <DrawerItem
             label={mode == 'dark' ?"Enable light Mode" :"Enable Dark Mode"}
             activeTintColor={Colors.accent}
             activeBackgroundColor="white"
@@ -89,10 +90,12 @@ const CustomDrawerComponent = props => {
             inactiveBackgroundColor="transparent"
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
             onPress={() => handleThemeChange()}
-          />
+          /> */}
         </View>
       </DrawerContentScrollView>
       <View>
+        <DarkModeSwitch onPress={() => handleThemeChange()} />
+
         <DrawerItem
           label="Logout"
           activeTintColor={Colors.accent}

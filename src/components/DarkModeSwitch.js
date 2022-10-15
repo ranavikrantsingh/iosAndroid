@@ -17,8 +17,9 @@ const CheckBoxSquare = props => {
   return (
     <TouchableOpacity
       onPressIn={() => {
-        handleAnimation()
-      }} onPress={props.onPress}>
+        handleAnimation();
+      }}
+      onPress={props.onPress}>
       <View>
         <LottieView
           source={require('../assets/animations/DarkMode.json')}
