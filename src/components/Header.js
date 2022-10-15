@@ -1,4 +1,4 @@
-import React, {useRef, useState,useEffect} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -9,14 +9,14 @@ import {
 } from 'react-native';
 import {Button} from 'native-base';
 import BackNew from '../assets/svg/BackNew.svg';
-import { useSelector,useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {scale} from '../utils/scaling';
 import Colors from '../constants/Colors';
 import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default NewHeader = props => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const progress = useRef(new Animated.Value(0)).current;
   const animate = useRef(new Animated.Value(0)).current;
 
@@ -62,8 +62,11 @@ export default NewHeader = props => {
               alignItems: 'center',
             }}>
             <Button style={styles.closeIcon} onPress={props.onPress}>
-            <Icon name="menu" size={25} color={mode == 'dark'? '#fff':'#000'}/>
-
+              <Icon
+                name="menu"
+                size={25}
+                color={mode == 'dark' ? '#fff' : '#000'}
+              />
             </Button>
             <Text
               style={[
@@ -127,7 +130,11 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleMenu}
               onPress={props.onPress}>
-              <Icon name="menu" size={25} color={mode == 'dark'? '#fff':'#000'}/>
+              <Icon
+                name="menu"
+                size={25}
+                color={mode == 'dark' ? '#fff' : '#000'}
+              />
             </TouchableWithoutFeedback>
             <View style={styles.dateContainer}>
               <Text
@@ -147,8 +154,11 @@ export default NewHeader = props => {
               style={styles.closeIcon}
               onPressIn={handleAnimation}
               onPress={props.onBellPress}>
-                            <Icon name="bell" size={25} color={mode == 'dark'? '#fff':'#000'}/>
-
+              <Icon
+                name="bell"
+                size={25}
+                color={mode == 'dark' ? '#fff' : '#000'}
+              />
             </TouchableWithoutFeedback>
           </View>
         ) : (
@@ -174,34 +184,41 @@ export default NewHeader = props => {
   );
 };
 
-const CloseHeader = props => (
-  <View style={[styles.container, props.style]}>
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginLeft: scale(10),
-      }}>
-      <Button style={styles.closeIcon} onPress={props.onPress}>
-      <Icon name="back" size={25} color={mode == 'dark'? '#fff':'#000'}/>
+const CloseHeader = props => {
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
+  return (
+    <View style={[styles.container, props.style]}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginLeft: scale(10),
+        }}>
+        <Button style={styles.closeIcon} onPress={props.onPress}>
+          <Icon
+            name="chevron-left"
+            size={25}
+            color={mode == 'dark' ? '#fff' : '#000'}
+          />
+        </Button>
+        <Text
+          style={
+            mode == 'dark' ? styles.darkModeHeadingText : styles.headingText2
+          }
+          numberOfLines={1}>
+          {props.text}
+        </Text>
 
-      </Button>
-      <Text
-        style={[
-          styles.headingText2,
-          {
-            color: props.fill ? props.fill : '#000000',
-          },
-        ]}
-        numberOfLines={1}>
-        {props.text}
-      </Text>
-
-      <View />
+        <View />
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export {CloseHeader};
 
@@ -217,10 +234,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Colors.accent,
     left: scale(30),
-    right: scale(30)
+    right: scale(30),
   },
   container: {
-    padding:scale(10)
+    padding: scale(10),
     // flexDirection: 'row',
     // alignItems: 'center',
   },
@@ -230,12 +247,20 @@ const styles = StyleSheet.create({
     bottom: Platform.OS == 'ios' ? -4 : 0,
     left: -20,
   },
+  darkModeHeadingText: {
+    fontFamily: 'honc-Medium',
+    fontSize: scale(18),
+    left: -30,
+    color: '#fff',
+    textAlign: 'center',
+    bottom: Platform.OS == 'ios' ? -4 : 0,
+  },
   headingText2: {
     fontFamily: 'honc-Medium',
     fontSize: scale(18),
-    left: -20,
-
-    // textAlign:'center',
+    left: -30,
+    color: '#000',
+    textAlign: 'center',
     bottom: Platform.OS == 'ios' ? -4 : 0,
   },
   headingText3: {

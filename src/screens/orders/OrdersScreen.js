@@ -4,8 +4,9 @@ import {useSelector} from 'react-redux';
 import { scale } from '../../utils/scaling';
 import { useIsFocused } from '@react-navigation/native';
 import Colors from '../../constants/Colors';
+import { CloseHeader } from '../../components/Header';
 import all_styles from '../../styles/all_styles';
-const OrdersScreen = () => {
+const OrdersScreen = (props) => {
   const [user, setUser] = useState(
     useSelector(state => state?.appReducer?.user),
   );
@@ -26,6 +27,11 @@ const OrdersScreen = () => {
       <FocusAwareStatusBar
         backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
         barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
+      />
+      <CloseHeader
+      text="Orders"
+      onPress={()=>props.navigation.goBack()}
+      fill={mode == 'dark' ? '#121212' : '#fff'}
       />
       </SafeAreaView>
   );

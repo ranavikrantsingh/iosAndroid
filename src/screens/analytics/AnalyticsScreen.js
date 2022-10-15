@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import { scale } from '../../utils/scaling';
 import { useIsFocused } from '@react-navigation/native';
 import Colors from '../../constants/Colors';
+import { CloseHeader } from '../../components/Header';
 import all_styles from '../../styles/all_styles';
 const AnalyticsScreen = () => {
   const [user, setUser] = useState(
@@ -23,6 +24,11 @@ const AnalyticsScreen = () => {
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
+        <CloseHeader
+      text="Analytics"
+      onPress={()=>props.navigation.goBack()}
+      fill={mode == 'dark' ? '#121212' : '#fff'}
+      />
       <FocusAwareStatusBar
         backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
         barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}

@@ -47,7 +47,7 @@ const HomeScreen = props => {
       <ScrollView>
         <View style={styles.insideContainer}>
           <Text style={mode == 'dark' ? styles.darkmodeWelcomeText :styles.welcomeText} numberOfLines={1}>
-            Hi, {user}!
+            Welcome, {user}!
           </Text>
           <PremiumBlock />
         </View>
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(23),
   },
   welcomeText: {
-    fontSize: scale(20),
+    fontSize: scale(25),
     fontFamily: 'honc-Bold',
     color: '#000',
     paddingVertical: scale(20),
   },
   darkmodeWelcomeText: {
-    fontSize: scale(20),
+    fontSize: scale(25),
     fontFamily: 'honc-Bold',
     color: '#fff',
     paddingVertical: scale(20),
