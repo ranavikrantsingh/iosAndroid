@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   darkModeContainer: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.darkMode,
   },
   insideContainer: {
     marginHorizontal: scale(23),

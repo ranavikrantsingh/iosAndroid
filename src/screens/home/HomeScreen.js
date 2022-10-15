@@ -14,6 +14,7 @@ import Header from '../../components/Header';
 import PremiumBlock from './components/PremiumBlock';
 import moment from 'moment';
 import {useIsFocused} from '@react-navigation/native';
+import Colors from '../../constants/Colors';
 const HomeScreen = props => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   darkModeContainer: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor:Colors.darkMode,
   },
   insideContainer: {
     marginHorizontal: scale(23),

@@ -1,18 +1,17 @@
 import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DynamicButton from '../../components/DynamicButton';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {scale} from '../../utils/scaling';
 const OtpScreen = props => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   var contact = useSelector(state => state.appReducer.mobileNumber);
 
   var replaced = contact.replace(/^(.{2}).*(.{3}).*(.{4})$/, `$1****$3`);
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
- 
 
   // Update the app Incase the theme mode changes
   useEffect(() => {
@@ -22,12 +21,17 @@ const OtpScreen = props => {
     props.navigation.navigate('CreateAccount');
   };
   return (
-    <SafeAreaView style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
+    <SafeAreaView
+      style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
       <View style={styles.insideContainer}>
-        <Text  style={
+        <Text
+          style={
             mode == 'dark' ? styles.darkmodeWelcomeText : styles.welcomeText
-          }>Welcome</Text>
-        <Text style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>
+          }>
+          Welcome
+        </Text>
+        <Text
+          style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>
           Please enter the otp sent to {replaced}
         </Text>
         <OTPInputView
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
   },
   darkModeContainer: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.darkMode,
   },
   insideContainer: {
     marginHorizontal: scale(23),

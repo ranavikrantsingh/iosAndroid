@@ -12,9 +12,13 @@ import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-import {setIsAuthenticated, setUserDetails,switchMode} from '../../redux/actions';
+import {
+  setIsAuthenticated,
+  setUserDetails,
+  switchMode,
+} from '../../redux/actions';
 import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
@@ -26,7 +30,6 @@ const CreateAccount = props => {
   const [hasEmailErrors, sethasEmailErrors] = useState(false);
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
- 
 
   // Update the app Incase the theme mode changes
   useEffect(() => {
@@ -74,7 +77,8 @@ const CreateAccount = props => {
     }
   };
   return (
-    <SafeAreaView style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
+    <SafeAreaView
+      style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
       <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
       <View style={styles.halfScreen}>
         <TouchableOpacity>
@@ -89,7 +93,10 @@ const CreateAccount = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.insideContainer}>
-        <Text style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>Please enter your details.</Text>
+        <Text
+          style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>
+          Please enter your details.
+        </Text>
         <TextInput
           mode="flat"
           label="Name"
@@ -211,7 +218,7 @@ const styles = StyleSheet.create({
   },
   darkModeContainer: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: Colors.darkMode,
   },
   insideContainer: {
     marginHorizontal: scale(23),

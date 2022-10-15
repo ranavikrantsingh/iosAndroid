@@ -1,16 +1,21 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {scale} from '../../../utils/scaling';
 import Colors from '../../../constants/Colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { useSelector } from 'react-redux';
 const PremiumBlock = props => {
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   return (
     <TouchableOpacity
       onPress={props.onPress}
       disabled={props.disabled}
       activeOpacity={0.9}>
-      <View style={styles.card}>
+      <View style={mode == 'dark' ? styles.darkModeCard :styles.card}>
         <Text style={styles.text}>✪ For Gated Communities</Text>
         <Text style={styles.labelText}>loremIpsum</Text>
         <View style={styles.miniSquare}>
@@ -24,6 +29,13 @@ const PremiumBlock = props => {
 export default PremiumBlock;
 
 const styles = StyleSheet.create({
+  darkModeCard: {
+    backgroundColor: Colors.background,
+    borderRadius: scale(20),
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(16),
+    marginVertical: scale(10),
+  },
   card: {
     backgroundColor: '#000',
     borderRadius: scale(20),
