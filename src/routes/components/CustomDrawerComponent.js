@@ -60,7 +60,10 @@ const CustomDrawerComponent = props => {
               />
               <View style={{marginLeft: scale(1), flex: 1}}>
                 <Text style={styles.label} numberOfLines={1}>
-                  {user}
+                  {user[0]}
+                </Text>
+                <Text style={styles.label} numberOfLines={1}>
+                  {user[1]}
                 </Text>
               </View>
               <View>

@@ -51,9 +51,9 @@ const HomeScreen = props => {
               mode == 'dark' ? styles.darkmodeWelcomeText : styles.welcomeText
             }
             numberOfLines={1}>
-            Welcome, {user}!
+            Welcome, {user[0]}!
           </Text>
-          <PremiumBlock title={user} subTitle={user} />
+          <PremiumBlock title={user[0]} subTitle={user[1]} />
         </View>
       </ScrollView>
     </SafeAreaView>

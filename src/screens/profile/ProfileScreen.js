@@ -36,7 +36,7 @@ const ProfileScreen = props => {
       />
       <View style={styles.tealBackground}></View>
       <View style={mode == 'dark' ? styles.darkModeBackground:styles.whiteBackground}>
-        <Text style={mode == 'dark' ? styles.darkmodeWelcomeText:styles.welcomeText}>Hi {user}</Text>
+        <Text style={mode == 'dark' ? styles.darkmodeWelcomeText:styles.welcomeText}>Hi {user[0]}</Text>
       </View>
     </>
   );

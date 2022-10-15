@@ -71,7 +71,7 @@ const CreateAccount = props => {
       //   name: 'OtpScreen',
       // });
       dispatch(setIsAuthenticated(true));
-      dispatch(setUserDetails(name));
+      dispatch(setUserDetails([name,email]));
     } else {
       toastr.showToast(validation.message);
     }
