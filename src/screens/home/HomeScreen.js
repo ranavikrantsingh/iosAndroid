@@ -6,7 +6,7 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import all_styles from '../../styles/all_styles';
 import {scale} from '../../utils/scaling';
 import {useSelector, useDispatch} from 'react-redux';
@@ -46,10 +46,14 @@ const HomeScreen = props => {
       />
       <ScrollView>
         <View style={styles.insideContainer}>
-          <Text style={mode == 'dark' ? styles.darkmodeWelcomeText :styles.welcomeText} numberOfLines={1}>
+          <Text
+            style={
+              mode == 'dark' ? styles.darkmodeWelcomeText : styles.welcomeText
+            }
+            numberOfLines={1}>
             Welcome, {user}!
           </Text>
-          <PremiumBlock />
+          <PremiumBlock title={user} subTitle={user} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
   },
   darkModeContainer: {
     flex: 1,
-    backgroundColor:Colors.darkMode,
+    backgroundColor: Colors.darkMode,
   },
   insideContainer: {
     marginHorizontal: scale(23),

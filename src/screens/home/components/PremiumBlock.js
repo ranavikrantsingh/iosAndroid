@@ -16,8 +16,8 @@ const PremiumBlock = props => {
       disabled={props.disabled}
       activeOpacity={0.9}>
       <View style={mode == 'dark' ? styles.darkModeCard :styles.card}>
-        <Text style={styles.text}>✪ For Gated Communities</Text>
-        <Text style={styles.labelText}>loremIpsum</Text>
+        <Text style={styles.text}>✪ {props.title}</Text>
+        <Text style={styles.labelText}>{props.subTitle}</Text>
         <View style={styles.miniSquare}>
         <Icon name="rocket" size={20} color="#fff" />
         </View>
