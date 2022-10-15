@@ -141,7 +141,7 @@ export default NewHeader = props => {
                 style={[
                   styles.headingText3,
                   {
-                    color: props.fill ? props.fill : Colors.accent,
+                    color: props.fill ? props.fill : Colors.teal,
                   },
                 ]}
                 numberOfLines={1}>
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   dateContainer: {
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: Colors.accent,
+    borderColor: Colors.teal,
     left: scale(30),
     right: scale(30),
   },
