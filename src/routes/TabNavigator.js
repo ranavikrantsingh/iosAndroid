@@ -3,7 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {scale} from '../utils/scaling';
 import OrdersScreen from '../screens/orders/OrdersScreen';
 import LottieView from 'lottie-react-native';
-import ProfileScreen from '../screens/profile/ProfileScreen';
+import AnalyticsScreen from '../screens/analytics/AnalyticsScreen';
+import WalletScreen from '../screens/wallet/WalletScreen';
 import {StatusBar} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -74,8 +75,8 @@ const TabNavigator = props => {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
+          name="Analytics"
+          component={AnalyticsScreen}
           options={{
             title: 'Analytics',
             tabBarIcon: ({color, focused}) =>
@@ -93,7 +94,7 @@ const TabNavigator = props => {
         />
         <Tab.Screen
           name="Wallet"
-          component={ProfileScreen}
+          component={WalletScreen}
           options={{
             title: 'Wallet',
             tabBarIcon: ({color, focused}) =>
