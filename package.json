@@ -3,11 +3,21 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ip": "ipconfig getifaddr en0",
+    "renameapk": "run a query that renames builtapk to version",
+    "buildapk": "cd android && ./gradlew assembleRelease",
+    "buildrelease": "cd android && ./gradlew bundleRelease",
     "android": "react-native run-android",
+    "pod-update": "cd ios && arch -x86_64 pod install --repo-update",
     "ios": "react-native run-ios",
+    "b-ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
+    "ios-build": "react-native bundle --entry-file ./index.js --platform ios --bundle-output ios/main.jsbundle --assets-dest ios",
+    "i": "react-native bundle --minify --entry-file index.js --platform ios --dev false --bundle-output ./ios/main.jsbundle --assets-dest ./ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "patch-package"
+
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.10",
