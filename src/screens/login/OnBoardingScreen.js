@@ -25,25 +25,25 @@ const OnBoardingScreen = props => {
     {
       key: 0,
       title: 'Hey there!',
-      // image: require('../assets/animations/Hello.json'),
+      image: require('../../assets/animations/robot.json'),
       desc: 'Welcome to the app and thank you for downloading it.',
     },
     {
       key: 1,
       title: 'Fearless',
-      // image: require('../assets/animations/curious_dog.json'),
+      image: require('../../assets/animations/Cart.json'),
       desc: 'Feel free to explore the app',
     },
     {
       key: 2,
       title: 'Musician',
-      // image: require('../assets/animations/Guitarist.json'),
+      image: require('../../assets/animations/BarChart.json'),
       desc: 'I am a musician and I love to play music',
     },
     {
       key: 3,
       title: 'Here you go !',
-      // image: require('../assets/animations/BellNotification.json'),
+      image: require('../../assets/animations/Wallet.json'),
       desc: "Let's get started",
     },
   ];
