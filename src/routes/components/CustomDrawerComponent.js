@@ -19,6 +19,8 @@ import {logout, switchMode} from '../../redux/actions';
 import DarkModeSwitch from '../../components/DarkModeSwitch';
 import {useDispatch, useSelector} from 'react-redux';
 import all_styles from '../../styles/all_styles';
+import LottieView from 'lottie-react-native';
+import DarkModeBanner from '../../components/DarkModeBanner';
 const CustomDrawerComponent = props => {
   const dispatch = useDispatch();
   const [data, setData] = useState('');
@@ -42,35 +44,19 @@ const CustomDrawerComponent = props => {
         {...props}
         contentContainerStyle={styles.drawerContent}>
         <View>
-          <ImageBackground
+          {/* <ImageBackground
             blurRadius={5}
             source={{
               uri: 'https://i.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8',
             }}
-            style={styles.bg}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <Image
-                source={{uri: user[2]?.image || user[2]?.assets[0]?.uri}}
-                style={styles.profileImage}
-              />
-              <View style={{marginLeft: scale(1), flex: 1}}>
-                <Text style={styles.label} numberOfLines={1}>
-                  {user[0]}
-                </Text>
-                <Text style={styles.label} numberOfLines={1}>
-                  {user[1]}
-                </Text>
-              </View>
-              <View>
-                <DarkModeSwitch onPress={() => handleThemeChange()} />
-              </View>
-            </View>
-          </ImageBackground>
+            style={styles.bg}> */}
+          <DarkModeBanner
+            name={user[0]}
+            image={{uri: user[2]?.image || user[2]?.assets[0]?.uri}}
+            subTitle={user[1]}
+            onPress={() => handleThemeChange()}
+          />
+          {/* </ImageBackground> */}
         </View>
         {/* <DrawerItemList {...props} /> */}
         <View style={{marginTop: scale(10)}}>
