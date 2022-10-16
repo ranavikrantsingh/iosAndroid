@@ -14,11 +14,8 @@ import {toastr} from '../../utils/toast';
 import all_styles from '../../styles/all_styles';
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-import {
-  setIsAuthenticated,
-  setUserDetails,
-  switchMode,
-} from '../../redux/actions';
+import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
+import CameraPopup from './components/CameraPopup';
 import LottieView from 'lottie-react-native';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
@@ -26,6 +23,8 @@ const CreateAccount = props => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profileImage, setprofileImage] = useState(null);
+  const [showImagePopup, setshowImagePopup] = useState(false);
   const [hasNameErrors, setHasNameErrors] = useState(false);
   const [hasEmailErrors, sethasEmailErrors] = useState(false);
   const theme = useSelector(state => state.appReducer);
@@ -61,6 +60,10 @@ const CreateAccount = props => {
     return output;
   };
 
+  const handleAvatarUpload = avatar_url => {
+    setprofileImage(avatar_url);
+  };
+
   const handleCreateAccount = () => {
     let data = {};
     data.name = name;
@@ -71,7 +74,7 @@ const CreateAccount = props => {
       //   name: 'OtpScreen',
       // });
       dispatch(setIsAuthenticated(true));
-      dispatch(setUserDetails([name,email]));
+      dispatch(setUserDetails([name, email,profileImage]));
     } else {
       toastr.showToast(validation.message);
     }
@@ -81,14 +84,22 @@ const CreateAccount = props => {
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
       <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
       <View style={styles.halfScreen}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setshowImagePopup(true)}>
           <View style={styles.round}>
-            <LottieView
-              source={require('../../assets/animations/Profile.json')}
-              autoPlay
-              autoSize
-              style={{borderRadius: scale(100), marginTop: scale(-4)}}
-            />
+            {profileImage ? (
+              <Image 
+              source={{uri:profileImage?.image}}
+              style={styles.profilePicture}
+              />
+              
+            ) : (
+              <LottieView
+                source={require('../../assets/animations/Profile.json')}
+                autoPlay
+                autoSize
+                style={{borderRadius: scale(100), marginTop: scale(-4)}}
+              />
+            )}
           </View>
         </TouchableOpacity>
       </View>
@@ -204,6 +215,14 @@ const CreateAccount = props => {
         <DynamicButton onPress={() => handleCreateAccount()}>
           Save
         </DynamicButton>
+        {showImagePopup ? (
+          <CameraPopup
+            ActivePopUp={0}
+            avatar={avatar_url => handleAvatarUpload(avatar_url)}
+            modalVisible={showImagePopup}
+            setModalVisible={() => setshowImagePopup(false)}
+          />
+        ) : null}
       </View>
     </SafeAreaView>
   );
@@ -285,4 +304,9 @@ const styles = StyleSheet.create({
     borderWidth: scale(3),
     marginTop: '20%',
   },
+  profilePicture:{
+    height:scale(100),
+    width:scale(100),
+    borderRadius:scale(100)
+  }
 });

@@ -55,7 +55,7 @@ const CustomDrawerComponent = props => {
                 justifyContent: 'space-between',
               }}>
               <Image
-                source={{uri: data.profileImage}}
+                source={{uri: user[2]?.image}}
                 style={styles.profileImage}
               />
               <View style={{marginLeft: scale(1), flex: 1}}>
