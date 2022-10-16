@@ -35,7 +35,9 @@ const CustomDrawerComponent = props => {
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
-
+console.log('====================================');
+console.log(user[2].assets[0].uri);
+console.log('====================================');
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -55,7 +57,7 @@ const CustomDrawerComponent = props => {
                 justifyContent: 'space-between',
               }}>
               <Image
-                source={{uri: user[2]?.image}}
+                source={{uri: user[2]?.image || user[2]?.assets[0]?.uri}}
                 style={styles.profileImage}
               />
               <View style={{marginLeft: scale(1), flex: 1}}>

@@ -156,6 +156,8 @@ const CreateAccount = props => {
       }
     });
   };
+  console.log(profileImage.assets[0].uri,'Rana')
+
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
@@ -165,7 +167,7 @@ const CreateAccount = props => {
           <View style={styles.round}>
             {profileImage ? (
               <Image 
-              source={{uri:profileImage?.image}}
+              source={{uri:profileImage?.image || profileImage?.assets[0]?.uri}}
               style={styles.profilePicture}
               />
               
