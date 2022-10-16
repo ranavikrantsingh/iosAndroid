@@ -34,8 +34,10 @@ const HomeScreen = props => {
     greeting = 'Good Morning';
   } else if (currentTime > 12 && currentTime <= 17) {
     greeting = 'Good Afternoon';
-  } else {
+  } else if (currentTime >= 18 && currentTime <= 20) {
     greeting = 'Good Evening';
+  } else {
+    greeting = 'Good Night';
   }
   function FocusAwareStatusBar(props) {
     const isFocused = useIsFocused();
