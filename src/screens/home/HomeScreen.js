@@ -25,11 +25,24 @@ const HomeScreen = props => {
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+  const date = new Date();
+  const currentTime = date.getHours();
+
+  let greeting;
+
+  if (currentTime >= 0 && currentTime <= 12) {
+    greeting = 'Good Morning';
+  } else if (currentTime > 12 && currentTime <= 17) {
+    greeting = 'Good Afternoon';
+  } else {
+    greeting = 'Good Evening';
+  }
   function FocusAwareStatusBar(props) {
     const isFocused = useIsFocused();
 
     return isFocused ? <StatusBar {...props} /> : null;
   }
+
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
@@ -51,7 +64,7 @@ const HomeScreen = props => {
               mode == 'dark' ? styles.darkmodeWelcomeText : styles.welcomeText
             }
             numberOfLines={1}>
-            Welcome, {user[0]}!
+            {`${greeting}, ${user[0]}!`}
           </Text>
           <PremiumBlock title={user[0]} subTitle={user[1]} />
         </View>
