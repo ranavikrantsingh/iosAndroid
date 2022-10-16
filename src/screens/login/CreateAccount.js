@@ -4,6 +4,7 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  PermissionsAndroid,
   Image,
   StatusBar,
 } from 'react-native';
@@ -11,7 +12,7 @@ import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
-import all_styles from '../../styles/all_styles';
+import * as ImagePicker from 'react-native-image-picker'
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
@@ -78,6 +79,82 @@ const CreateAccount = props => {
     } else {
       toastr.showToast(validation.message);
     }
+  };
+ const requestPermission = async () => {
+    if (Platform.OS === 'ios') {
+      this.handleImageUpload();
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'App Camera Permission',
+            message: 'App needs access to your camera ',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Camera permission given');
+          handleImageUpload();
+        } else {
+          console.log('Camera permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
+
+ const handleImageUpload = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        console.log('response', JSON.stringify(response));
+      
+        setprofileImage(response);
+      }
+    });
+  };
+
+ const handleGalleryUpload = () => {
+    let options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        console.log('response', JSON.stringify(response));
+        
+        setprofileImage(response);
+      }
+    });
   };
   return (
     <SafeAreaView
@@ -213,6 +290,8 @@ const CreateAccount = props => {
         {showImagePopup ? (
           <CameraPopup
             ActivePopUp={0}
+            camera={()=>requestPermission()}
+            gallery={()=>handleGalleryUpload()}
             avatar={avatar_url => handleAvatarUpload(avatar_url)}
             modalVisible={showImagePopup}
             setModalVisible={() => setshowImagePopup(false)}
