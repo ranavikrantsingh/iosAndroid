@@ -156,7 +156,6 @@ const CreateAccount = props => {
       }
     });
   };
-  console.log(profileImage.assets[0].uri,'Rana')
 
   return (
     <SafeAreaView
