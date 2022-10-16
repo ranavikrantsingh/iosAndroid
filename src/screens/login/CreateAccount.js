@@ -16,7 +16,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
 import CameraPopup from './components/CameraPopup';
-import LottieView from 'lottie-react-native';
+import Camera from '../../assets/svg/Camerablue.svg';
 import DynamicButton from '../../components/DynamicButton';
 const CreateAccount = props => {
   const dispatch = useDispatch();
@@ -93,12 +93,7 @@ const CreateAccount = props => {
               />
               
             ) : (
-              <LottieView
-                source={require('../../assets/animations/Profile.json')}
-                autoPlay
-                autoSize
-                style={{borderRadius: scale(100), marginTop: scale(-4)}}
-              />
+              <Camera height={100} width={50}/>
             )}
           </View>
         </TouchableOpacity>
@@ -298,15 +293,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   round: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     alignItems: 'center',
     borderRadius: scale(100),
-    borderWidth: scale(3),
+    height:scale(140),width:scale(140),
+    alignItems:'center',
     marginTop: '20%',
   },
   profilePicture:{
-    height:scale(100),
-    width:scale(100),
+    height:scale(140),
+    width:scale(140),
     borderRadius:scale(100)
   }
 });

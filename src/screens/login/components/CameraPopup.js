@@ -10,7 +10,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import { scale } from '../../../utils/scaling';
+import {scale} from '../../../utils/scaling';
 import Colors from '../../../constants/Colors';
 import all_styles from '../../../styles/all_styles';
 import BackNew from '../../../assets/svg/back_2.svg';
@@ -21,24 +21,35 @@ import DynamicButton from '../../../components/DynamicButton';
 
 const CameraPopup = props => {
   const [avatarImages, setavatarImages] = useState([
-    {id:0,
-    image:    'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ',
-}, {id:1,
-    image:    'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ',
-},])
-    
-//   const getAllAvatarProfileImages = () => {
-    // callApi(`v2/customer/${props.userId}/get-profile-images`, 'get').then(
-    //   (res) => {
-    //     if (res.status == 'Success') {
-    //       setavatarImages(res.data);
-    //     }
-    //   },
-    // );
-//   };
-//   useEffect(() => {
-//     getAllAvatarProfileImages();
-//   }, []);
+    {
+      id: 0,
+      image:
+        'https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ',
+    },
+    {
+      id: 1,
+      image:
+        'https://i.picsum.photos/id/1074/5472/3648.jpg?hmac=w-Fbv9bl0KpEUgZugbsiGk3Y2-LGAuiLZOYsRk0zo4A',
+    },
+    {
+        id: 2,
+        image:
+          'https://i.picsum.photos/id/342/2896/1944.jpg?hmac=_2cYDHi2iG1XY53gvXOrhrEWIP5R5OJlP7ySYYCA0QA',
+      },
+  ]);
+
+  //   const getAllAvatarProfileImages = () => {
+  // callApi(`v2/customer/${props.userId}/get-profile-images`, 'get').then(
+  //   (res) => {
+  //     if (res.status == 'Success') {
+  //       setavatarImages(res.data);
+  //     }
+  //   },
+  // );
+  //   };
+  //   useEffect(() => {
+  //     getAllAvatarProfileImages();
+  //   }, []);
 
   const renderView = () => {
     if (props.ActivePopUp == 0) {
@@ -92,7 +103,10 @@ const CameraPopup = props => {
                   return (
                     <>
                       <TouchableOpacity onPress={() => props.avatar(item)}>
-                        <Image source={{uri: item?.image}} style={styles.avatar} />
+                        <Image
+                          source={{uri: item?.image}}
+                          style={styles.avatar}
+                        />
                       </TouchableOpacity>
                     </>
                   );
@@ -105,9 +119,9 @@ const CameraPopup = props => {
             )}
             {/* <View style={styles.line} /> */}
             <View style={{marginVertical: scale(20)}}>
-              <DynamicButton onPress={props.confirmButton}>
+              {/* <DynamicButton onPress={props.confirmButton}>
                 Save Changes
-              </DynamicButton>
+              </DynamicButton> */}
             </View>
           </View>
         </View>
