@@ -35,9 +35,7 @@ const CustomDrawerComponent = props => {
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
-console.log('====================================');
-console.log(user[2].assets[0].uri);
-console.log('====================================');
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
