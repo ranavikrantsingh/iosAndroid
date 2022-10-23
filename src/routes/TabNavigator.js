@@ -5,7 +5,7 @@ import OrdersScreen from '../screens/orders/OrdersScreen';
 import LottieView from 'lottie-react-native';
 import AnalyticsScreen from '../screens/analytics/AnalyticsScreen';
 import WalletScreen from '../screens/wallet/WalletScreen';
-import {StatusBar} from 'react-native';
+import {Platform, StatusBar} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import WalletIcon from 'react-native-vector-icons/FontAwesome5';
@@ -24,13 +24,13 @@ const TabNavigator = props => {
             // borderRadius: scale(200),
             // left: 20,
             // right: 20,
-            height: scale(60),
+            height: Platform.OS === 'ios' ? scale(80) : scale(60),
             // bottom: 8,
           },
           tabBarLabelStyle: {
             fontFamily: 'honc-Bold',
             fontSize: 13,
-            bottom: scale(5),
+            bottom: Platform.OS === 'ios' ? scale(-2):scale(5),
           },
           headerShown: false,
           tabBarActiveTintColor: '#f2f2f2',
@@ -65,7 +65,7 @@ const TabNavigator = props => {
               focused ? (
                 <LottieView
                   source={require('../assets/animations/Home.json')}
-                  style={{height: scale(50), width: scale(35)}}
+                  style={{height: scale(30), width: scale(35)}}
                   autoPlay
                   loop
                 />

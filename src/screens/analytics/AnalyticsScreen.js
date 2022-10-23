@@ -10,7 +10,9 @@ import React, {useState} from 'react';
 import Chat from './components/Chat';
 import LinearGradient from 'react-native-linear-gradient';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import Swipable from './components/Swipeable';
+import Swipable from './components/Swipable';
+import {useIsFocused} from '@react-navigation/native';
+
 
 const data = [
   {
@@ -79,6 +81,12 @@ const data = [
 ];
 
 export default function DeleteChat() {
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
+
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
+
   const [selectedIndex, setSelectedIndex] = useState(undefined);
   const [conversations, setConversations] = useState(data);
 
@@ -92,7 +100,7 @@ export default function DeleteChat() {
 
   return (
     <>
-      <StatusBar
+      <FocusAwareStatusBar
         barStyle="light-content"
         translucent={true}
         backgroundColor="transparent"
