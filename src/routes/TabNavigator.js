@@ -78,7 +78,7 @@ const TabNavigator = props => {
           name="Analytics"
           component={AnalyticsScreen}
           options={{
-            title: 'Analytics',
+            title: 'Chat',
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
