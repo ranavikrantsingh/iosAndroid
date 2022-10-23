@@ -67,7 +67,7 @@ const TabNavigator = props => {
                   source={require('../assets/animations/Home.json')}
                   style={{height: scale(30), width: scale(35)}}
                   autoPlay
-                  loop
+                  loop={false}
                 />
               ) : (
                 <Icon name="home" size={20} color="#fff" />
@@ -82,13 +82,13 @@ const TabNavigator = props => {
             tabBarIcon: ({color, focused}) =>
               focused ? (
                 <LottieView
-                  source={require('../assets/animations/BarChart.json')}
+                  source={require('../assets/animations/Chat.json')}
                   style={{height: scale(40), width: scale(35)}}
                   autoPlay
-                  loop
+                  loop={false}
                 />
               ) : (
-                <Icon name="bar-chart-o" size={20} color="#fff" />
+                <Icon name="wechat" size={20} color="#fff" />
               ),
           }}
         />
