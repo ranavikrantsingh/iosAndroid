@@ -29,21 +29,12 @@ export default function ProductPage(props) {
     setMode(theme.mode);
   }, [theme]);
   return (
-    <>
-      {isAndroid ? (
-        <FocusAwareStatusBar barStyle="light-content"
+    <SafeAreaView style={styles.mainContainer}>
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        translucent={true}
         backgroundColor="transparent"
-        transclucent={true}/>
-      ) : (
-        <>
-          <SafeAreaView style={{backgroundColor: '#fff'}}></SafeAreaView>
-          <FocusAwareStatusBar
-            barStyle="light-content"
-            backgroundColor="transparent"
-            transclucent={true}
-          />
-        </>
-      )}
+      />
       <TouchableOpacity
         onPress={() => props.navigation.navigate('DrawerNavigator')}>
         <View style={styles.backBtn}>
@@ -57,7 +48,6 @@ export default function ProductPage(props) {
           <Text style={[styles.heading]}>
             Levi's Men's Washed Cotton Hooded Military Jacket
           </Text>
-          <Icon style={styles.review} name="hearto" size={25} color="#D61C4E" />
         </View>
 
         <Text style={[styles.heading, styles.price]}>$ 30</Text>
@@ -67,7 +57,7 @@ export default function ProductPage(props) {
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
           <Icon style={styles.review} name="star" size={13} color="#FDCC0D" />
-          <Text style={{}}>(30 Reviews)</Text>
+          <Text style={{color: '#fff'}}>(30 Reviews)</Text>
         </View>
 
         <Text style={styles.description}>
@@ -77,11 +67,14 @@ export default function ProductPage(props) {
         </Text>
       </View>
       <AddToCart />
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
   mainContent: {flex: 1, padding: 25, marginTop: isAndroid ? 0 : '5%'},
   imageContainer: {
     flexDirection: 'row',
@@ -101,7 +94,7 @@ const styles = StyleSheet.create({
     // marginBottom: 15,
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'black',
+    color: '#fff',
   },
   review: {
     marginRight: 5,
@@ -115,6 +108,7 @@ const styles = StyleSheet.create({
   description: {
     marginTop: isAndroid ? 5 : 10,
     lineHeight: 20,
+    color: '#fff',
   },
   price: {color: 'green', marginBottom: isAndroid ? 0 : 5},
   backBtn: {

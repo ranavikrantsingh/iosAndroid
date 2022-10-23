@@ -23,6 +23,7 @@ import BackgroundImage from './components/BackgroundImage';
 import SliderDot from './components/Dots';
 
 const data = [
+  'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
   'https://images.unsplash.com/photo-1570745859748-6ba2014423eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
   'https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHw%3D&w=1000&q=80',
   'https://i.pinimg.com/564x/3d/c8/26/3dc826c7103ae621402e887c55f2cdbf.jpg',
@@ -134,9 +135,6 @@ const styles = StyleSheet.create({
 });
 
 // Lets add comment
-
-
-
 
 // import {StyleSheet, Text, SafeAreaView,StatusBar} from 'react-native';
 // import React, {useState, useEffect} from 'react';
