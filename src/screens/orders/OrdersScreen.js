@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import AddToCart from './components/AddToCart';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import SliderScreen from '../tools/SliderScreen';
 const isAndroid = Platform.OS === 'android';
 
 export default function ProductPage(props) {
@@ -31,13 +31,16 @@ export default function ProductPage(props) {
   return (
     <>
       {isAndroid ? (
-        <FocusAwareStatusBar backgroundColor="#fff" />
+        <FocusAwareStatusBar barStyle="light-content"
+        backgroundColor="transparent"
+        transclucent={true}/>
       ) : (
         <>
           <SafeAreaView style={{backgroundColor: '#fff'}}></SafeAreaView>
           <FocusAwareStatusBar
             barStyle="light-content"
-            backgroundColor="#fff"
+            backgroundColor="transparent"
+            transclucent={true}
           />
         </>
       )}
@@ -48,14 +51,8 @@ export default function ProductPage(props) {
         </View>
       </TouchableOpacity>
 
+      <SliderScreen />
       <View style={styles.mainContent}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.productImage}
-            source={{uri:`https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg`}}
-          />
-        </View>
-
         <View style={styles.titleSection}>
           <Text style={[styles.heading]}>
             Levi's Men's Washed Cotton Hooded Military Jacket
