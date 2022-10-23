@@ -6,7 +6,7 @@ import TapToPay from './components/TapToPay';
 const BkashPayment = () => {
   return (
     <>
-      <StatusBar backgroundColor="#e2136e" />
+      <StatusBar backgroundColor="#fff" />
       <SafeAreaView style={style.container}>
         <View style={style.innerContent}>
           <View style={{flex: 1, paddingHorizontal: 20}}>
@@ -53,7 +53,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
-    padding: 20,
+    // padding: 20,
   },
   innerContent: {
     backgroundColor: 'white',

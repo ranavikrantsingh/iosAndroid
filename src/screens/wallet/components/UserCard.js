@@ -1,17 +1,10 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-// import TextAvatar from './textAvatar';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const UserCard = ({title, subTitle, description, avatarText, avatarColor}) => {
   return (
     <View style={style.row}>
-      {/* <TextAvatar
-        size={38}
-        fontSize={18}
-        text={avatarText}
-        color={avatarColor}
-      /> */}
       <Icon name="user-circle" color="grey" size={45} />
       <View style={style.mailText}>
         <Text style={[style.title, style.bold]}>{title}</Text>
