@@ -6,13 +6,14 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Chat from './components/Chat';
+import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import Swipable from './components/Swipable';
 import {useIsFocused} from '@react-navigation/native';
-
+import Colors from '../../constants/Colors';
 
 const data = [
   {
@@ -89,6 +90,11 @@ export default function DeleteChat() {
 
   const [selectedIndex, setSelectedIndex] = useState(undefined);
   const [conversations, setConversations] = useState(data);
+  const theme = useSelector(state => state.appReducer);
+  const [mode, setMode] = useState(theme.mode);
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
 
   const handleDelete = (deleteIndex, isApplicable) => {
     setTimeout(() => {
@@ -112,9 +118,11 @@ export default function DeleteChat() {
         style={{height: 130}}
       />
 
-      <View style={styles.container}>
+      <View style={mode == 'dark' ? styles.darkContainer : styles.container}>
         <View style={styles.chatHeader}>
-          <Text style={styles.chatTxt}>Chat</Text>
+          <Text style={mode == 'dark' ? styles.darkchatTxt : styles.chatTxt}>
+            Chat
+          </Text>
           <TouchableOpacity>
             <View>
               <AntIcon name="plus" size={25} color="#4283d7" />
@@ -155,6 +163,13 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     marginTop: -30,
   },
+  darkContainer: {
+    backgroundColor: Colors.darkMode,
+    flex: 1,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    marginTop: -30,
+  },
   chatHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -162,4 +177,5 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   chatTxt: {fontSize: 25, fontWeight: 'bold'},
+  darkchatTxt: {color: '#fff', fontSize: 25, fontWeight: 'bold'},
 });
