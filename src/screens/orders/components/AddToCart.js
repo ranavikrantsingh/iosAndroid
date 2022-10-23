@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  SafeAreaView,
+  TouchableOpacity,
   Platform,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
@@ -18,7 +18,6 @@ import Animated, {
   withSpring,
   runOnJS,
 } from 'react-native-reanimated';
-import Ripple from 'react-native-material-ripple';
 const isAndroid = Platform.OS === 'android';
 
 const {width} = Dimensions.get('window');
@@ -114,7 +113,7 @@ const AddToCart = () => {
           </Animated.View>
         </View>
         <View style={{width: '50%'}}>
-          <Ripple
+          <TouchableOpacity
             onPress={handleAddToCart}
             style={[style.col, style.addToCartBtn]}>
             <View>
@@ -186,7 +185,7 @@ const AddToCart = () => {
                 onInit={saveAnimFunc}
               />
             </View>
-          </Ripple>
+          </TouchableOpacity>
         </View>
       </View>
     </>
