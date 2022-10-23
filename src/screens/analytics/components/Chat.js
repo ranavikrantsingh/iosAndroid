@@ -66,6 +66,7 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 16,
+    color: '#000',
     marginBottom: 5,
   },
   subTitle: {

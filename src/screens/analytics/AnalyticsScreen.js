@@ -176,6 +176,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
   },
-  chatTxt: {fontSize: 25, fontWeight: 'bold'},
+  chatTxt: {fontSize: 25, fontWeight: 'bold', color: '#000'},
   darkchatTxt: {color: '#fff', fontSize: 25, fontWeight: 'bold'},
 });
