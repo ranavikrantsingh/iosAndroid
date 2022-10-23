@@ -153,9 +153,9 @@ export default NewHeader = props => {
             <TouchableWithoutFeedback
               style={styles.closeIcon}
               onPressIn={handleAnimation}
-              onPress={props.onBellPress}>
+              onPress={props.cartPress}>
               <Icon
-                name="bell"
+                name="shopping-cart"
                 size={25}
                 color={mode == 'dark' ? '#fff' : '#000'}
               />

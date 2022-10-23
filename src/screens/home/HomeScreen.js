@@ -56,7 +56,7 @@ const HomeScreen = props => {
       <Header
         noArrow={false}
         text={moment().format('MMM DD, YYYY')}
-        onBellPress={() => props.navigation.navigate('Notifications')}
+        cartPress={() => props.navigation.navigate('OrdersScreen')}
         onPress={() => props.navigation.toggleDrawer()}
       />
       <ScrollView>
