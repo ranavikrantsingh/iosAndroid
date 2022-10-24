@@ -29,7 +29,7 @@ export default function ProductPage(props) {
     setMode(theme.mode);
   }, [theme]);
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       <FocusAwareStatusBar
         barStyle="light-content"
         translucent={true}
@@ -67,7 +67,7 @@ export default function ProductPage(props) {
         </Text>
       </View>
       <AddToCart />
-    </SafeAreaView>
+    </View>
   );
 }
 
