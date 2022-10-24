@@ -1,23 +1,29 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useSelector} from 'react-redux';
 import Colors from '../../../constants/Colors';
+import {scale} from '../../../utils/scaling';
 
-const UserCard = ({title, subTitle, description, avatarText, avatarColor}) => {
+const UserCard = props => {
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
+  
 
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
   return (
     <View style={mode == 'dark' ? style.darkRow : style.row}>
-      <Icon name="user-circle" color="grey" size={45} />
+      {props?.image ? (
+        <Image source={props?.image} style={style.image} />
+      ) : (
+        <Icon name="user-circle" color="grey" size={45} />
+      )}
       <View style={style.mailText}>
         <Text
           style={[mode == 'dark' ? style.darkTitle : style.title, style.bold]}>
-          {title}
+          {props?.title}
         </Text>
         <Text
           style={[
@@ -25,7 +31,7 @@ const UserCard = ({title, subTitle, description, avatarText, avatarColor}) => {
             style.bold,
           ]}
           numberOfLines={1}>
-          {subTitle}
+          {props?.subTitle}
         </Text>
       </View>
     </View>
@@ -71,5 +77,14 @@ const style = StyleSheet.create({
   darkSubTitle: {
     fontSize: 13,
     color: '#fff',
+  },
+  image: {
+    width: scale(60),
+    height: scale(60),
+    marginRight: scale(5),
+    
+    borderColor: '#fFF',
+    borderWidth: scale(1),
+    borderRadius: scale(100),
   },
 });

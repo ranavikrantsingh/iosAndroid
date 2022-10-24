@@ -8,7 +8,9 @@ import Colors from '../../constants/Colors'
 const BkashPayment = () => {
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
-
+  const [user, setUser] = useState(
+    useSelector(state => state?.appReducer?.user),
+  );
   function FocusAwareStatusBar(props) {
     const isFocused = useIsFocused();
 
@@ -30,10 +32,10 @@ const BkashPayment = () => {
             Confirm to <Text style={style.bold}>Mobile Recharge</Text>
           </Text>
           <UserCard
-            title="Rana Vikrant Singh Rathod"
-            subTitle="9666836140"
-            avatarText="R"
-            avatarColor="#e2136e"
+            title={user[0]}
+            subTitle={user[1]}
+            image={{uri: user[2]?.image || user[2]?.assets[0]?.uri}}
+
           />
           <View style={style.boxArea}>
             <View style={style.Row}>
