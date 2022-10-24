@@ -4,7 +4,8 @@ import UserCard from './components/UserCard';
 import TapToPay from './components/TapToPay';
 import {useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
-import Colors from '../../constants/Colors'
+import Colors from '../../constants/Colors';
+import {scale} from '../../utils/scaling';
 const BkashPayment = () => {
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
@@ -26,7 +27,7 @@ const BkashPayment = () => {
         barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
       />
 
-      <View style={mode == 'dark' ? style.darkContent :style.innerContent}>
+      <View style={mode == 'dark' ? style.darkContent : style.innerContent}>
         <View style={{flex: 1, paddingHorizontal: 20}}>
           <Text style={style.heading}>
             Confirm to <Text style={style.bold}>Mobile Recharge</Text>
@@ -35,25 +36,40 @@ const BkashPayment = () => {
             title={user[0]}
             subTitle={user[1]}
             image={{uri: user[2]?.image || user[2]?.assets[0]?.uri}}
-
           />
           <View style={style.boxArea}>
             <View style={style.Row}>
               <View style={style.col}>
-                <Text>Total</Text>
-                <Text>$10.00</Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  Total
+                </Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  $10.00
+                </Text>
               </View>
               <View style={style.col}>
-                <Text>New Balance</Text>
-                <Text>$2710.00</Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  New Balance
+                </Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  $2710.00
+                </Text>
               </View>
               <View style={style.col}>
-                <Text>Type</Text>
-                <Text>Prepaid</Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  Type
+                </Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  Prepaid
+                </Text>
               </View>
               <View style={style.col}>
-                <Text>Mobile Operator</Text>
-                <Text>Airtel</Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  Mobile Operator
+                </Text>
+                <Text style={mode == 'dark' ? style.darkTitle : style.title}>
+                  Airtel
+                </Text>
               </View>
             </View>
           </View>
@@ -98,5 +114,13 @@ const style = StyleSheet.create({
   col: {
     width: '50%',
     paddingVertical: 15,
+  },
+  darkTitle: {
+    color: '#fff',
+    fontSize: scale(12),
+  },
+  title: {
+    color: '#2a2e39',
+    fontSize: scale(12),
   },
 });
