@@ -80,16 +80,17 @@ const CustomDrawerComponent = props => {
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
             onPress={() => props.navigation.navigate('Orders')}
           />
-          {/* <DrawerItem
-            label={mode == 'dark' ?"Enable light Mode" :"Enable Dark Mode"}
+          <DrawerItem
+            label="Liquid Swipe"
             activeTintColor={Colors.accent}
             activeBackgroundColor="white"
             labelStyle={[all_styles.span_16_m, {color: '#fff'}]}
             inactiveTintColor="white"
             inactiveBackgroundColor="transparent"
             style={{backgroundColor: 'transparent', marginTop: '0%'}}
-            onPress={() => handleThemeChange()}
-          /> */}
+            onPress={() => props.navigation.navigate('AnimatedOnBoarding')}
+          />
+          
         </View>
       </DrawerContentScrollView>
       <View>

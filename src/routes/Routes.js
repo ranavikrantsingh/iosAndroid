@@ -6,6 +6,7 @@ import TabNavigator from './TabNavigator';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import DrawerNavigator from './DrawerNavigator';
 import OrdersScreen from '../screens/orders/OrdersScreen';
+import AnimatedOnboarding from '../screens/onboardingscreen/AnimatedOnboarding';
 const Stack = createNativeStackNavigator();
 const defaultScreenOptions = {
   headerShadowVisible: false,
@@ -34,6 +35,11 @@ export default function Routes() {
          <Stack.Screen
           name="Orders"
           component={OrdersScreen}
+          options={HiddenScreenOptions}
+        />
+         <Stack.Screen
+          name="AnimatedOnBoarding"
+          component={AnimatedOnboarding}
           options={HiddenScreenOptions}
         />
       </Stack.Navigator>
