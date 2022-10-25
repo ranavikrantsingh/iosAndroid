@@ -2,7 +2,7 @@ import Color from "color";
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import Svg, { RadialGradient, Defs, Rect, Stop } from "react-native-svg";
-
+import LottieView from 'lottie-react-native'
 const { width, height } = Dimensions.get("screen");
 const SIZE = width - 75;
 const styles = StyleSheet.create({
@@ -56,7 +56,7 @@ const Slide = ({
         <Rect x={0} y={0} width={width} height={height} fill="url(#gradient)" />
       </Svg>
       <View style={styles.container}>
-        <Image source={picture} style={styles.image} />
+        <LottieView source={picture} style={styles.image} autoPlay loop />
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>

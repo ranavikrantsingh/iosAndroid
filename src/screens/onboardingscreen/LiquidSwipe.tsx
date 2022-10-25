@@ -5,26 +5,25 @@ import Slide from "./components/Slide";
 const slides = [
   {
     color: "#F2A1AD",
-    title: "Dessert Recipes",
-    description:
-      "Hot or cold, our dessert recipes can turn an average meal into a memorable event",
-    picture:   'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
+    title: "Hey There!",
+    description:"Rana here",
+    picture:   require('../../assets/animations/robot.json'),
 
   },
   {
     color: "#0090D6",
-    title: "Healthy Foods",
+    title: "Wallet",
     description:
-      "Discover healthy recipes that are easy to do with detailed cooking instructions from top chefs",
-    picture:  'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
+      "Discover your wallet",
+      picture:   require('../../assets/animations/Wallet.json'),
 
   },
   {
     color: "#69C743",
-    title: "Easy Meal Ideas",
+    title: "Easy Orders",
     description:
       "explore recipes by food type, preparation method, cuisine, country and more",
-    picture:  'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
+      picture:   require('../../assets/animations/CartActive.json'),
 
   },
   {
@@ -32,7 +31,7 @@ const slides = [
     title: "10000+ Recipes",
     description:
       "Browse thousands of curated recipes from top chefs, each with detailled cooking instructions",
-    picture:   'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
+      picture:   require('../../assets/animations/pencil-animation.json'),
 
   },
   {
@@ -40,9 +39,9 @@ const slides = [
     title: "Video Tutorials",
     description:
       "Browse our best themed recipes, cooking tips, and how-to food video & photos",
-    picture:   'https://honcimagecdn.s3.ap-south-1.amazonaws.com/1666539724958-productImg.jpeg',
-
+    picture:   require('../../assets/animations/bell.json'),
   },
+  
 ];
 
 export const assets = slides.map(({ picture }) => picture);
