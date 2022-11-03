@@ -15,6 +15,7 @@ import PremiumBlock from './components/PremiumBlock';
 import moment from 'moment';
 import {useIsFocused} from '@react-navigation/native';
 import Colors from '../../constants/Colors';
+import SwipeUnlock from '../../components/SliderButton';
 const HomeScreen = props => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(
@@ -69,6 +70,7 @@ const HomeScreen = props => {
             {`${greeting}, ${user[0]}!`}
           </Text>
           <PremiumBlock title={user[0]} subTitle={user[1]} />
+          <SwipeUnlock/>
         </View>
       </ScrollView>
     </SafeAreaView>
