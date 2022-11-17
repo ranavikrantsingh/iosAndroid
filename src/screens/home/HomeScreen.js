@@ -16,6 +16,7 @@ import moment from 'moment';
 import {useIsFocused} from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 import SwipeUnlock from '../../components/SliderButton';
+// import MyHeader from '../../components/MyHeader'
 const HomeScreen = props => {
   const dispatch = useDispatch();
   const [user, setUser] = useState(
@@ -53,7 +54,13 @@ const HomeScreen = props => {
         backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
         barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
       />
-
+{/* <MyHeader
+        back
+        onPressBack={() => props.navigation.toggleDrawer()}
+        title={moment().format('MMM DD, YYYY')}
+        right="more-vertical"
+        onRightPress={() => props.navigation.navigate('OrdersScreen')}
+      /> */}
       <Header
         noArrow={false}
         text={moment().format('MMM DD, YYYY')}
