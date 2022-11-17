@@ -1,88 +1,147 @@
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React, {useState,useEffect} from 'react';
-import {scale} from '../../utils/scaling';
-import {useSelector, useDispatch} from 'react-redux';
-import all_styles from '../../styles/all_styles';
-import {useIsFocused} from '@react-navigation/native';
+import React, { useEffect, useRef } from 'react'
+import { Dimensions, FlatList, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import Styles from '../../styles/Styles';
 import Colors from '../../constants/Colors';
-const ProfileScreen = props => {
-  const [user, setUser] = useState(
-    useSelector(state => state?.appReducer?.user),
-  );
-  const theme = useSelector(state => state.appReducer);
-  const [mode, setMode] = useState(theme.mode);
-  const dispatch = useDispatch();
-  function FocusAwareStatusBar(props) {
-    const isFocused = useIsFocused();
+import MyHeader from '../../components/MyHeader';
+import { Button, List } from 'react-native-paper';
+import * as Animatable from 'react-native-animatable'
+import Icon, { Icons } from '../../components/Icons';
+import { Animations } from '../../constants/Animations';
 
-    return isFocused ? <StatusBar {...props} /> : null;
+const colorAr = [
+  '#637aff',
+  '#60c5a8',
+  '#CCCCCC',
+  '#ff5454',
+  '#039a83',
+  '#dcb834',
+  '#8f06e4',
+  'skyblue',
+  '#ff4c98',
+]
+const bgColor = (i) => colorAr[i % colorAr.length];
+
+const ListItem = ({ item, index, animation, navigation }) => {
+  return (
+    <Animatable.View
+      animation={animation}
+      duration={1000}
+      delay={index * 300}
+    >
+      <View style={styles.listItem}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('ContactsList')}>
+          <View style={[styles.image, { backgroundColor: bgColor(index) }]} />
+        </TouchableOpacity>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.name}>Lorem ipsum</Text>
+          <Icon type={Icons.Feather} name="more-vertical" size={20} color={Colors.black} />
+        </View>
+      </View>
+    </Animatable.View>
+  )
+}
+
+export default function ListScreen({ route, navigation }) {
+
+  const viewRef = useRef(null);
+  const animation = Animations[Math.floor(Math.random() * Animations.length)]
+  console.log('====================================');
+  console.log(Math.floor(Math.random() * Animations.length), Math.random() * Animations.length, Animations.length);
+  console.log('====================================');
+
+  const renderItem = ({ item, index }) => (
+    <ListItem item={item} index={index} animation={animation} navigation={navigation} />)
+
+  const ListEmptyComponent = () => {
+    const anim = {
+      0: { translateY: 0 },
+      0.5: { translateY: 50 },
+      1: { translateY: 0 },
+    }
+    return (
+      <View style={[styles.listEmpty]}>
+        <Animatable.Text
+          animation={anim}
+          easing="ease-in-out"
+          duration={3000}
+          style={{ fontSize: 24 }}
+          iterationCount="infinite">
+          Empty List!
+        </Animatable.Text>
+      </View>
+    )
   }
   useEffect(() => {
-    setMode(theme.mode);
-  }, [theme]);
-  return (
-    <>
-      <FocusAwareStatusBar
-        backgroundColor={Colors.teal}
-        barStyle={'light-content'}
-      />
-      <View style={styles.tealBackground}></View>
-      <View style={mode == 'dark' ? styles.darkModeBackground:styles.whiteBackground}>
-        <Text style={mode == 'dark' ? styles.darkmodeWelcomeText:styles.welcomeText}>Hi {user[0]}</Text>
-      </View>
-    </>
-  );
-};
+    const unsubscribe = navigation.addListener('focus', () => {
+      viewRef.current.animate({ 0: { opacity: 0.5, }, 1: { opacity: 1 } });
+    })
+    // ToastAndroid.show(animation+ ' Animation', ToastAndroid.SHORT);
+    return () => unsubscribe;
+  }, [navigation])
 
-export default ProfileScreen;
+  return (
+    <View style={[Styles.container]}>
+      <MyHeader
+        back
+        onPressBack={() => navigation.goBack()}
+        title={route.name}
+        right="more-vertical"
+        onRightPress={() => console.log('right')}
+      />
+      <Animatable.View
+        ref={viewRef}
+        easing={'ease-in-out'}
+        duration={500}
+        style={Styles.container}>
+        <FlatList
+          data={Array(15).fill('')}
+          keyExtractor={(_, i) => String(i)}
+          numColumns={2}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          ListEmptyComponent={ListEmptyComponent}
+        />
+      </Animatable.View>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
-  tealBackground: {
-    flex: 1,
-    backgroundColor: Colors.teal,
+  name: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'black',
   },
-  whiteBackground: {
-    flex: 2,
-    borderTopLeftRadius: scale(20),
-    position: 'absolute',
-    bottom: scale(0),
-    elevation: 4,
-    height: '50%',
-    paddingHorizontal: scale(23),
-    width: '100%',
-    borderTopRightRadius: scale(20),
-    backgroundColor: '#fff',
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: 'rgba(0, 0, 0, .08)',
   },
-  darkModeBackground:{
-    flex: 2,
-    borderTopLeftRadius: scale(20),
-    position: 'absolute',
-    bottom: scale(0),
-    elevation: 4,
-    height: '50%',
-    paddingHorizontal: scale(23),
-    width: '100%',
-    borderTopRightRadius: scale(20),
-    backgroundColor: Colors.darkMode,
+  listEmpty: {
+    height: Dimensions.get('window').height,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  welcomeText: {
-    fontSize: scale(20),
-    fontFamily: 'honc-Bold',
-    color: '#000',
-    paddingVertical: scale(20),
+  listItem: {
+    height: 200,
+    width: Dimensions.get('window').width / 2 - 16,
+    backgroundColor: 'white',
+    margin: 8,
+    borderRadius: 10,
   },
-  darkmodeWelcomeText: {
-    fontSize: scale(20),
-    fontFamily: 'honc-Bold',
-    color: '#fff',
-    paddingVertical: scale(20),
+  image: {
+    height: 150,
+    margin: 5,
+    borderRadius: 10,
+    backgroundColor: Colors.primary,
   },
-});
+  detailsContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+})
