@@ -4,7 +4,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import all_styles from '../styles/all_styles';
 import TabNavigator from './TabNavigator';
 import TabNavigator_1 from './TabNavigator_1';
-import TabNavigator_2 from './TabNavigator_2';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import AnimatedBottomTab from './AnimatedBottomTab';
 import AnimatedBottomTab_1 from './AnimatedBottomTab_1';
@@ -25,10 +24,10 @@ export default function Routes() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={TabNavigator_2}>
+        initialRouteName={AnimatedBottomTab_1}>
         <Stack.Screen
           name="TabNavigator"
-          component={TabNavigator_2}
+          component={AnimatedBottomTab_2}
           options={HiddenScreenOptions}
         />
         <Stack.Screen
