@@ -2,7 +2,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React,{useState,useEffect} from 'react';
 import {scale} from '../../../utils/scaling';
 import Colors from '../../../constants/Colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon, { Icons } from '../../../components/Icons';
+
 import { useSelector } from 'react-redux';
 const PremiumBlock = props => {
   const theme = useSelector(state => state.appReducer);
@@ -19,7 +20,7 @@ const PremiumBlock = props => {
         <Text style={styles.text}>✪ {props.title}</Text>
         <Text style={styles.labelText}>{props.subTitle}</Text>
         <View style={styles.miniSquare}>
-        <Icon name="rocket" size={20} color="#fff" />
+        <Icon type={Icons.FontAwesome} name="rocket" color={Colors.secondary} size={24} />
         </View>
       </View>
     </TouchableOpacity>
@@ -63,7 +64,6 @@ const styles = StyleSheet.create({
     width: scale(30),
     bottom: scale(-5),
     right: scale(-5),
-    padding:scale(3),
     position: 'absolute',
   },
 });
