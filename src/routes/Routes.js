@@ -8,6 +8,7 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import AnimatedBottomTab from './AnimatedBottomTab';
 import AnimatedBottomTab_1 from './AnimatedBottomTab_1';
 import AnimatedBottomTab_2 from './AnimatedBottomTab_2';
+import ContactsList from '../screens/ContactsList';
 import OrdersScreen from '../screens/orders/OrdersScreen';
 import AnimatedOnboarding from '../screens/onboardingscreen/AnimatedOnboarding';
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ export default function Routes() {
         <Stack.Screen
           name="AnimatedOnBoarding"
           component={AnimatedOnboarding}
+          options={HiddenScreenOptions}
+        />
+        <Stack.Screen
+          name="ContactsList"
+          component={ContactsList}
           options={HiddenScreenOptions}
         />
       </Stack.Navigator>
