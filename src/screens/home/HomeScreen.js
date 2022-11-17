@@ -76,7 +76,7 @@ const HomeScreen = props => {
             numberOfLines={1}>
             {`${greeting}, ${user[0]}!`}
           </Text>
-          <PremiumBlock title={user[0]} subTitle={user[1]} onPress={()=>props?.navigation?.navigate('ContactsList')} />
+          <PremiumBlock title={user[0]} subTitle={user[1]} onPress={()=>props?.navigation?.navigate('FABScreen')} />
           <SwipeUnlock/>
         </View>
       </ScrollView>

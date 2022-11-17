@@ -11,6 +11,7 @@ import AnimatedBottomTab_2 from './AnimatedBottomTab_2';
 import ContactsList from '../screens/ContactsList';
 import OrdersScreen from '../screens/orders/OrdersScreen';
 import AnimatedOnboarding from '../screens/onboardingscreen/AnimatedOnboarding';
+import FABScreen from '../screens/FABScreen';
 const Stack = createNativeStackNavigator();
 const defaultScreenOptions = {
   headerShadowVisible: false,
@@ -49,6 +50,11 @@ export default function Routes() {
         <Stack.Screen
           name="ContactsList"
           component={ContactsList}
+          options={HiddenScreenOptions}
+        />
+        <Stack.Screen
+          name="FABScreen"
+          component={FABScreen}
           options={HiddenScreenOptions}
         />
       </Stack.Navigator>
