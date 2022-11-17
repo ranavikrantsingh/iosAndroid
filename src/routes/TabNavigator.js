@@ -249,6 +249,136 @@
 //     color: Colors.primary,
 //   }
 // })
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import React, { useEffect, useRef } from 'react'
+// import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+// import Icon, { Icons } from '../components/Icons';
+// import Colors from '../constants/Colors';
+// import * as Animatable from 'react-native-animatable';
+// import OrdersScreen from '../screens/orders/OrdersScreen';
+// import AnalyticsScreen from '../screens/analytics/AnalyticsScreen';
+// import WalletScreen from '../screens/wallet/WalletScreen';
+// import DrawerNavigator from './DrawerNavigator';
+
+
+// const TabArr = [
+//   { route: 'OrdersScreen', label: 'Home', type: Icons.Feather, icon: 'home', component: OrdersScreen },
+//   { route: 'AnalyticsScreen', label: 'Search', type: Icons.Feather, icon: 'search', component: AnalyticsScreen },
+//   { route: 'WalletScreen', label: 'Add', type: Icons.Feather, icon: 'plus-square', component: WalletScreen },
+//   { route: 'DrawerNavigator', label: 'Like', type: Icons.Feather, icon: 'heart', component: DrawerNavigator },
+// ];
+
+// const Tab = createBottomTabNavigator();
+
+// const animate1 = { 0: { scale: .5, translateY: 7 }, .92: { translateY: -34 }, 1: { scale: 1.2, translateY: -24 } }
+// const animate2 = { 0: { scale: 1.2, translateY: -24 }, 1: { scale: 1, translateY: 7 } }
+
+// const circle1 = { 0: { scale: 0 }, 0.3: { scale: .9 }, 0.5: { scale: .2 }, 0.8: { scale: .7 }, 1: { scale: 1 } }
+// const circle2 = { 0: { scale: 1 }, 1: { scale: 0 } }
+
+// const TabButton = (props) => {
+//   const { item, onPress, accessibilityState } = props;
+//   const focused = accessibilityState.selected;
+//   const viewRef = useRef(null);
+//   const circleRef = useRef(null);
+//   const textRef = useRef(null);
+
+//   useEffect(() => {
+//     if (focused) {
+//       viewRef.current.animate(animate1);
+//       circleRef.current.animate(circle1);
+//       textRef.current.transitionTo({ scale: 1 });
+//     } else {
+//       viewRef.current.animate(animate2);
+//       circleRef.current.animate(circle2);
+//       textRef.current.transitionTo({ scale: 0 });
+//     }
+//   }, [focused])
+
+//   return (
+//     <TouchableOpacity
+//       onPress={onPress}
+//       activeOpacity={1}
+//       style={styles.container}>
+//       <Animatable.View
+//         ref={viewRef}
+//         duration={1000}
+//         style={styles.container}>
+//         <View style={styles.btn}>
+//           <Animatable.View
+//             ref={circleRef}
+//             style={styles.circle} />
+//           <Icon type={item.type} name={item.icon} color={focused ? Colors.secondary : Colors.primary} />
+//         </View>
+//         <Animatable.Text
+//           ref={textRef}
+//           style={styles.text}>
+//           {item.label}
+//         </Animatable.Text>
+//       </Animatable.View>
+//     </TouchableOpacity>
+//   )
+// }
+
+// export default function AnimTab1() {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarStyle: styles.tabBar,
+//       }}
+//     >
+//       {TabArr.map((item, index) => {
+//         return (
+//           <Tab.Screen key={index} name={item.route} component={item.component}
+//             options={{
+//               tabBarShowLabel: false,
+//               tabBarButton: (props) => <TabButton {...props} item={item} />
+//             }}
+//           />
+//         )
+//       })}
+//     </Tab.Navigator>
+//   )
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   tabBar: {
+//     height: 70,
+//     position: 'absolute',
+//     bottom: 16,
+//     right: 16,
+//     left: 16,
+//     borderRadius: 16,
+//   },
+//   btn: {
+//     width: 50,
+//     height: 50,
+//     borderRadius: 25,
+//     borderWidth: 4,
+//     borderColor: Colors.secondary,
+//     backgroundColor: Colors.white,
+//     justifyContent: 'center',
+//     alignItems: 'center'
+//   },
+//   circle: {
+//     ...StyleSheet.absoluteFillObject,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor: Colors.accent,
+//     borderRadius: 25,
+//   },
+//   text: {
+//     fontSize: 10,
+//     textAlign: 'center',
+//     color: Colors.primary,
+//   }
+// })
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useRef } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
@@ -259,39 +389,30 @@ import OrdersScreen from '../screens/orders/OrdersScreen';
 import AnalyticsScreen from '../screens/analytics/AnalyticsScreen';
 import WalletScreen from '../screens/wallet/WalletScreen';
 import DrawerNavigator from './DrawerNavigator';
-
+import { scale } from '../utils/scaling';
 
 const TabArr = [
-  { route: 'OrdersScreen', label: 'Home', type: Icons.Feather, icon: 'home', component: OrdersScreen },
-  { route: 'AnalyticsScreen', label: 'Search', type: Icons.Feather, icon: 'search', component: AnalyticsScreen },
-  { route: 'WalletScreen', label: 'Add', type: Icons.Feather, icon: 'plus-square', component: WalletScreen },
-  { route: 'DrawerNavigator', label: 'Like', type: Icons.Feather, icon: 'heart', component: DrawerNavigator },
+  { route: 'OrdersScreen', label: 'Home', type: Icons.Feather, icon: 'home', component: OrdersScreen, alphaClr: Colors.primaryAlpha  },
+  { route: 'AnalyticsScreen', label: 'Search', type: Icons.Feather, icon: 'search', component: AnalyticsScreen,alphaClr: Colors.greenAlpha },
+  { route: 'WalletScreen', label: 'Add', type: Icons.Feather, icon: 'plus-square', component: WalletScreen,alphaClr: Colors.redAlpha },
+  { route: 'DrawerNavigator', label: 'Like', type: Icons.Feather, icon: 'heart', component: DrawerNavigator,alphaClr: Colors.purpleAlpha },
 ];
 
 const Tab = createBottomTabNavigator();
-
-const animate1 = { 0: { scale: .5, translateY: 7 }, .92: { translateY: -34 }, 1: { scale: 1.2, translateY: -24 } }
-const animate2 = { 0: { scale: 1.2, translateY: -24 }, 1: { scale: 1, translateY: 7 } }
-
-const circle1 = { 0: { scale: 0 }, 0.3: { scale: .9 }, 0.5: { scale: .2 }, 0.8: { scale: .7 }, 1: { scale: 1 } }
-const circle2 = { 0: { scale: 1 }, 1: { scale: 0 } }
 
 const TabButton = (props) => {
   const { item, onPress, accessibilityState } = props;
   const focused = accessibilityState.selected;
   const viewRef = useRef(null);
-  const circleRef = useRef(null);
-  const textRef = useRef(null);
+  const textViewRef = useRef(null);
 
   useEffect(() => {
-    if (focused) {
-      viewRef.current.animate(animate1);
-      circleRef.current.animate(circle1);
-      textRef.current.transitionTo({ scale: 1 });
+    if (focused) { // 0.3: { scale: .7 }, 0.5: { scale: .3 }, 0.8: { scale: .7 },
+      viewRef.current.animate({ 0: { scale: 0 }, 1: { scale: 1 } });
+      textViewRef.current.animate({0: {scale: 0}, 1: {scale: 1}});
     } else {
-      viewRef.current.animate(animate2);
-      circleRef.current.animate(circle2);
-      textRef.current.transitionTo({ scale: 0 });
+      viewRef.current.animate({ 0: { scale: 1, }, 1: { scale: 0, } });
+      textViewRef.current.animate({0: {scale: 1}, 1: {scale: 0}});
     }
   }, [focused])
 
@@ -299,33 +420,38 @@ const TabButton = (props) => {
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={1}
-      style={styles.container}>
-      <Animatable.View
-        ref={viewRef}
-        duration={1000}
-        style={styles.container}>
-        <View style={styles.btn}>
+      style={[styles.container, {flex: focused ? 1 : 0.65}]}>
+      <View>
+        <Animatable.View
+          ref={viewRef}
+          style={[StyleSheet.absoluteFillObject, { backgroundColor: item.color, borderRadius: 16 }]} />
+        <View style={[styles.btn, { backgroundColor: focused ? item.alphaClr : null,borderRadius:scale(10) }]}>
+          <Icon type={item.type} name={item.icon} color={focused ? Colors.pink : Colors.primary} />
           <Animatable.View
-            ref={circleRef}
-            style={styles.circle} />
-          <Icon type={item.type} name={item.icon} color={focused ? Colors.secondary : Colors.primary} />
+            ref={textViewRef}>
+            {focused && <Text style={{
+              color: Colors.background, paddingHorizontal: 8
+            }}>{item.label}</Text>}
+          </Animatable.View>
         </View>
-        <Animatable.Text
-          ref={textRef}
-          style={styles.text}>
-          {item.label}
-        </Animatable.Text>
-      </Animatable.View>
+      </View>
     </TouchableOpacity>
   )
 }
 
-export default function AnimTab1() {
+export default function AnimTab3() {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: {
+          height: 60,
+          position: 'absolute',
+          bottom: 16,
+          right: 16,
+          left: 16,
+          borderRadius: 16
+        }
       }}
     >
       {TabArr.map((item, index) => {
@@ -344,38 +470,13 @@ export default function AnimTab1() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  tabBar: {
-    height: 70,
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-    left: 16,
-    borderRadius: 16,
   },
   btn: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 4,
-    borderColor: Colors.secondary,
-    backgroundColor: Colors.white,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  circle: {
-    ...StyleSheet.absoluteFillObject,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.accent,
-    borderRadius: 25,
-  },
-  text: {
-    fontSize: 10,
-    textAlign: 'center',
-    color: Colors.primary,
+    padding: 8,
+    borderRadius: 16,
   }
 })
