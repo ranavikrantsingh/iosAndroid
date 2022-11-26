@@ -12,6 +12,7 @@ import ContactsList from '../screens/ContactsList';
 import OrdersScreen from '../screens/orders/OrdersScreen';
 import AnimatedOnboarding from '../screens/onboardingscreen/AnimatedOnboarding';
 import FABScreen from '../screens/FABScreen';
+import CountryPicker from '../screens/orders/CountryPicker';
 const Stack = createNativeStackNavigator();
 const defaultScreenOptions = {
   headerShadowVisible: false,
@@ -56,6 +57,12 @@ export default function Routes() {
           name="FABScreen"
           component={FABScreen}
           options={HiddenScreenOptions}
+        />
+        <Stack.Screen
+        name="CountryPicker"
+        component={CountryPicker}
+        options={HiddenScreenOptions}
+
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -25,7 +25,7 @@ const ActionButton = ({ icon, style, onPress = () => { } }) => {
   )
 }
 
-export default function Fab() {
+export default function Fab(props) {
   const [open, toggle] = useReducer(s => !s, false)
 
   const rotation = useDerivedValue(() => {
@@ -102,7 +102,7 @@ export default function Fab() {
             <Icon type={Icons.EvilIcons} name="close" color={Colors.white} size={34} />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <ActionButton style={translationStyles(false, true, dist)} icon="calendar" />
+        <ActionButton style={translationStyles(false, true, dist)} icon="calendar" onPress={props?.navigation.navigate('CountryPicker')}/>
         <ActionButton style={translationStyles(true, true, middleDist)} icon="share-google" />
         <ActionButton style={translationStyles(true, false, dist)} icon="gear" />
       </View>
