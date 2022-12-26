@@ -1,13 +1,14 @@
 import {Dimensions} from 'react-native';
 
-const win = Dimensions.get('screen');
-const width = win.width;
-const guidelineBaseWidth = 370;
-const guidelineBaseHeight = 1000;
+const {width, height} = Dimensions.get('window');
 
-const scale = number => {
-  const a = number + number + number / 2 + 1;
-  return (width * a) / 1000;
-};
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+const guidelineBaseHeight = 680;
 
-export {scale};
+const scale = size => (width / guidelineBaseWidth) * size;
+const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  size + (scale(size) - size) * factor;
+
+export {scale, verticalScale, moderateScale};

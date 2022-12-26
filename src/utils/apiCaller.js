@@ -1,10 +1,9 @@
-export const API_URL = 'CustomApiUrl';
-// export const API_URL = 'https://devpartnerapi.honc.io';
-import React from 'react';
+export const API_URL = 'https://jsonplaceholder.typicode.com';
 
-export const FILE_UPLOAD_API_URL = 'CustomApiUrl';
-import DeviceInfo from 'react-native-device-info';
-import {store} from '../../src/redux/store';
+export const FILE_UPLOAD_API_URL = 'https://jsonplaceholder.typicode.com';
+
+// import DeviceInfo from 'react-native-device-info';
+import {store} from '../redux/store';
 
 const fetch = window.fetch;
 
@@ -15,7 +14,7 @@ export default async function callApi(endpoint, method = 'get', body) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      deviceid: `${DeviceInfo.getModel()}`,
+      //   deviceid: `${DeviceInfo.getModel()}`,
       authorization: `${token}`,
     },
     method,
