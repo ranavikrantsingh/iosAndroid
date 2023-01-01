@@ -7,6 +7,7 @@ import {
   Animated,
   Image,
   Dimensions,
+  TouchableOpacity
 } from 'react-native';
 import React, {useState} from 'react';
 import all_styles from '../../styles/all_styles';
@@ -17,8 +18,16 @@ import LottieView from 'lottie-react-native';
 const {width, height} = Dimensions.get('screen');
 
 const OnBoardingScreen = props => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+
   const [show, setshow] = useState(false);
   const scrollX = React.useRef(new Animated.Value(0)).current;
+const sliderRef = React.useRef()
+const handleDotPress = dotIndex => {
+  sliderRef?.current?.scrollToIndex({index: dotIndex, animated: true});
+  setCurrentIndex(dotIndex);
+};
 
   const bgs = ['#A5BBFF', '#DDBEFE', '#FF63ED', '#B98EFF'];
   const DATA = [
@@ -55,21 +64,31 @@ const OnBoardingScreen = props => {
           bottom: 100,
           flexDirection: 'row',
         }}>
-        {DATA.map((_, i) => {
-          const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
-          const scale = scrollX.interpolate({
-            inputRange,
-            outputRange: [0.8, 1.2, 0.8],
-            extrapolate: 'clamp',
-          });
-          const opacity = scrollX.interpolate({
-            inputRange,
-            outputRange: [0.6, 0.9, 0.6],
-            extrapolate: 'clamp',
-          });
+        {DATA?.length > 1 &&
+          DATA?.map((item, index) => {
+            const inputRange = [
+              (index - 1) * width,
+              index * width,
+              (index + 1) * width,
+            ];
+            const scale = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.6, 1, 0.6],
+              extrapolate: 'clamp',
+            });
+            const opacity = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.6, 0.9, 0.6],
+              extrapolate: 'clamp',
+            });
+
           return (
+            <TouchableOpacity
+            onPress={() => handleDotPress(index)}
+            key={item}>
+
             <Animated.View
-              key={`indicator-${i}`}
+              key={`indicator-${index}`}
               style={{
                 height: 12,
                 width: 12,
@@ -80,6 +99,7 @@ const OnBoardingScreen = props => {
                 transform: [{scale}],
               }}
             />
+            </TouchableOpacity>
           );
         })}
       </View>
@@ -175,6 +195,7 @@ const OnBoardingScreen = props => {
       <Animated.FlatList
         data={DATA}
         keyExtractor={item => item.key}
+        ref={sliderRef}
         horizontal
         scrollEventThrottle={32}
         pagingEnabled
