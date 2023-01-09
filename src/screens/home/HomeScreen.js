@@ -16,6 +16,7 @@ import moment from 'moment';
 import {useIsFocused} from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 import SwipeUnlock from '../../components/SliderButton';
+import MonthlyCalendarComponent from '../../components/MonthlyCalendarComponent';
 // import MyHeader from '../../components/MyHeader'
 const HomeScreen = props => {
   const dispatch = useDispatch();
@@ -78,6 +79,10 @@ const HomeScreen = props => {
           </Text>
           <PremiumBlock title={user[0]} subTitle={user[1]} onPress={()=>props?.navigation?.navigate('FABScreen')} />
           <SwipeUnlock/>
+          <MonthlyCalendarComponent
+            service_dates={props?.service_dates}
+            selectedDate={props?.selectedDate}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
