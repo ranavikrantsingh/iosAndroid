@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {scale} from '../utils/scaling';
-import Back from '../assets/icons/back_2.svg';
+import Back from '../assets/svg/back_2.svg';
 import moment from 'moment';
 import _ from 'lodash';
 

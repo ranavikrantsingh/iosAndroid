@@ -7,7 +7,7 @@ import {
   Animated,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
 import all_styles from '../../styles/all_styles';
@@ -19,15 +19,15 @@ const {width, height} = Dimensions.get('screen');
 
 const OnBoardingScreen = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [autoPlay, setAutoPlay] = useState(true);
 
   const [show, setshow] = useState(false);
   const scrollX = React.useRef(new Animated.Value(0)).current;
-const sliderRef = React.useRef()
-const handleDotPress = dotIndex => {
-  sliderRef?.current?.scrollToIndex({index: dotIndex, animated: true});
-  setCurrentIndex(dotIndex);
-};
+  const sliderRef = React.useRef();
+  const handleDotPress = dotIndex => {
+    sliderRef?.current?.scrollToIndex({index: dotIndex, animated: true});
+    setCurrentIndex(dotIndex);
+  };
 
   const bgs = ['#A5BBFF', '#DDBEFE', '#FF63ED', '#B98EFF'];
   const DATA = [
@@ -82,26 +82,25 @@ const handleDotPress = dotIndex => {
               extrapolate: 'clamp',
             });
 
-          return (
-            <TouchableOpacity
-            onPress={() => handleDotPress(index)}
-            key={item}>
-
-            <Animated.View
-              key={`indicator-${index}`}
-              style={{
-                height: 12,
-                width: 12,
-                borderRadius: 10,
-                backgroundColor: '#fff',
-                opacity,
-                margin: 10,
-                transform: [{scale}],
-              }}
-            />
-            </TouchableOpacity>
-          );
-        })}
+            return (
+              <TouchableOpacity
+                onPress={() => handleDotPress(index)}
+                key={index}>
+                <Animated.View
+                  key={`indicator-${index}`}
+                  style={{
+                    height: 12,
+                    width: 12,
+                    borderRadius: 10,
+                    backgroundColor: '#fff',
+                    opacity,
+                    margin: 10,
+                    transform: [{scale}],
+                  }}
+                />
+              </TouchableOpacity>
+            );
+          })}
       </View>
     );
   };
@@ -187,9 +186,31 @@ const handleDotPress = dotIndex => {
       </View>
     );
   };
+  React.useEffect(() => {
+    if (autoPlay) {
+      const interval = setInterval(() => {
+        if (currentIndex < DATA?.length - 1) {
+          setCurrentIndex(currentIndex + 1);
+          sliderRef?.current?.scrollToIndex({
+            index: currentIndex + 1,
+            animated: true,
+          });
+        } else {
+          setCurrentIndex(0);
+          sliderRef?.current?.scrollToIndex({
+            index: 0,
+            animated: true,
+          });
+        }
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [currentIndex, autoPlay]);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar translucent={true} backgroundColor="transparent" />
+      <StatusBar translucent={true} backgroundColor="transparent" barStyle={
+        'dark-content'
+      } />
       <Backdrop scrollX={scrollX} />
       <Square scrollX={scrollX} />
       <Animated.FlatList
@@ -203,6 +224,11 @@ const handleDotPress = dotIndex => {
           [{nativeEvent: {contentOffset: {x: scrollX}}}],
           {useNativeDriver: false},
         )}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
         onEndReached={() => setshow(true)}
         contentContainerStyle={{paddingBottom: 100}}
         showsHorizontalScrollIndicator={false}
