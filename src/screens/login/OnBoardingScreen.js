@@ -74,53 +74,68 @@ const OnBoardingScreen = props => {
       });
       setCurrentIndex(currentIndex - 1);
     }
-
-  }
+  };
   const Indicator = ({scrollX}) => {
     return (
       <View
         style={{
-          position: 'absolute',
-          bottom: 100,
           flexDirection: 'row',
+          position: 'absolute',
+          justifyContent: 'space-around',
+          bottom: 100,
+          alignItems: 'center',
+          width: '100%',
         }}>
-        {DATA?.length > 1 &&
-          DATA?.map((item, index) => {
-            const inputRange = [
-              (index - 1) * width,
-              index * width,
-              (index + 1) * width,
-            ];
-            const scale = scrollX.interpolate({
-              inputRange,
-              outputRange: [0.6, 1, 0.6],
-              extrapolate: 'clamp',
-            });
-            const opacity = scrollX.interpolate({
-              inputRange,
-              outputRange: [0.6, 0.9, 0.6],
-              extrapolate: 'clamp',
-            });
+        <TouchableOpacity onPress={handlePrev}>
+          <Text style={styles?.whiteText14}>Prev</Text>
+        </TouchableOpacity>
 
-            return (
-              <TouchableOpacity
-                onPress={() => handleDotPress(index)}
-                key={index}>
-                <Animated.View
-                  key={`indicator-${index}`}
-                  style={{
-                    height: 12,
-                    width: 12,
-                    borderRadius: 10,
-                    backgroundColor: '#fff',
-                    opacity,
-                    margin: 10,
-                    transform: [{scale}],
-                  }}
-                />
-              </TouchableOpacity>
-            );
-          })}
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          {DATA?.length > 1 &&
+            DATA?.map((item, index) => {
+              const inputRange = [
+                (index - 1) * width,
+                index * width,
+                (index + 1) * width,
+              ];
+              const scale = scrollX.interpolate({
+                inputRange,
+                outputRange: [0.6, 1, 0.6],
+                extrapolate: 'clamp',
+              });
+              const opacity = scrollX.interpolate({
+                inputRange,
+                outputRange: [0.6, 0.9, 0.6],
+                extrapolate: 'clamp',
+              });
+
+              return (
+                <TouchableOpacity
+                  onPress={() => handleDotPress(index)}
+                  key={index}>
+                  <Animated.View
+                    key={`indicator-${index}`}
+                    style={{
+                      height: 12,
+                      width: 12,
+                      borderRadius: 10,
+                      backgroundColor: '#fff',
+                      opacity,
+                      margin: 10,
+                      transform: [{scale}],
+                    }}
+                  />
+                </TouchableOpacity>
+              );
+            })}
+        </View>
+
+        <TouchableOpacity onPress={handleNext}>
+          <Text style={styles?.whiteText14}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -228,9 +243,11 @@ const OnBoardingScreen = props => {
   }, [currentIndex, autoPlay]);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar translucent={true} backgroundColor="transparent" barStyle={
-        'dark-content'
-      } />
+      <StatusBar
+        translucent={true}
+        backgroundColor="transparent"
+        barStyle={'dark-content'}
+      />
       <Backdrop scrollX={scrollX} />
       <Square scrollX={scrollX} />
       <Animated.FlatList
@@ -283,5 +300,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width,
     bottom: 0,
+  },
+  whiteText14: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
