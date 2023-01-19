@@ -56,6 +56,26 @@ const OnBoardingScreen = props => {
       desc: "Let's get started",
     },
   ];
+  const handleNext = () => {
+    if (currentIndex < DATA.length - 1) {
+      sliderRef?.current?.scrollToIndex({
+        index: currentIndex + 1,
+        animated: true,
+      });
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      sliderRef?.current?.scrollToIndex({
+        index: currentIndex - 1,
+        animated: true,
+      });
+      setCurrentIndex(currentIndex - 1);
+    }
+
+  }
   const Indicator = ({scrollX}) => {
     return (
       <View
