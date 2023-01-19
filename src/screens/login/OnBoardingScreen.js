@@ -3,9 +3,7 @@ import {
   Text,
   View,
   SafeAreaView,
-  StatusBar,
   Animated,
-  Image,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
@@ -15,13 +13,13 @@ import {scale} from '../../utils/scaling';
 import ButtonComponent from '../../components/ButtonComponent';
 import Colors from '../../constants/Colors';
 import LottieView from 'lottie-react-native';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 const {width, height} = Dimensions.get('screen');
 
 const OnBoardingScreen = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
-
-  const [show, setshow] = useState(false);
+  const [show, setShow] = useState(false);
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const sliderRef = React.useRef();
   const handleDotPress = dotIndex => {
@@ -86,9 +84,11 @@ const OnBoardingScreen = props => {
           alignItems: 'center',
           width: '100%',
         }}>
-        <TouchableOpacity onPress={handlePrev}>
-          <Text style={styles?.whiteText14}>Prev</Text>
-        </TouchableOpacity>
+        {currentIndex > 0 && (
+          <TouchableOpacity onPress={handlePrev}>
+            <Text style={styles?.whiteText14}>Prev</Text>
+          </TouchableOpacity>
+        )}
 
         <View
           style={{
@@ -133,9 +133,11 @@ const OnBoardingScreen = props => {
             })}
         </View>
 
-        <TouchableOpacity onPress={handleNext}>
-          <Text style={styles?.whiteText14}>Next</Text>
-        </TouchableOpacity>
+        {currentIndex < DATA?.length - 1 && (
+          <TouchableOpacity onPress={handleNext}>
+            <Text style={styles?.whiteText14}>Next</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   };
@@ -243,7 +245,7 @@ const OnBoardingScreen = props => {
   }, [currentIndex, autoPlay]);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar
+      <FocusAwareStatusBar
         translucent={true}
         backgroundColor="transparent"
         barStyle={'dark-content'}
@@ -266,7 +268,10 @@ const OnBoardingScreen = props => {
           offset: width * index,
           index,
         })}
-        onEndReached={() => setshow(true)}
+        onEndReached={() => {
+          setShow(true);
+          setAutoPlay(false);
+        }}
         contentContainerStyle={{paddingBottom: 100}}
         showsHorizontalScrollIndicator={false}
         renderItem={renderItem}
