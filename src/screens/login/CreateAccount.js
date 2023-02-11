@@ -5,23 +5,31 @@ import {
   SafeAreaView,
   TouchableOpacity,
   PermissionsAndroid,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
   Image,
   StatusBar,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {TextInput} from 'react-native-paper';
 import {scale} from '../../utils/scaling';
 import {toastr} from '../../utils/toast';
-import * as ImagePicker from 'react-native-image-picker'
+import * as ImagePicker from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
 import CameraPopup from './components/CameraPopup';
 import Camera from '../../assets/svg/Camerablue.svg';
 import DynamicButton from '../../components/DynamicButton';
+import config from './config.json';
+import { useHeaderHeight } from '@react-navigation/elements'
+
+import axios from 'axios';
 const CreateAccount = props => {
   const dispatch = useDispatch();
-
+const headerHeight = useHeaderHeight()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [profileImage, setprofileImage] = useState(null);
@@ -64,7 +72,61 @@ const CreateAccount = props => {
   const handleAvatarUpload = avatar_url => {
     setprofileImage(avatar_url);
   };
+  //give me a code for googlevision api caller using axios
 
+  const pushImageToTheGoogleVisionApi = image => {
+    const requestBody = {
+      requests: [
+        {
+          image: {source: {imageUri: image}}, // Replace with your image URL here.
+          features: [{type: 'LABEL_DETECTION', maxResults: 5}], // Replace with your feature type here.
+        },
+      ],
+    };
+
+    axios
+      .post(
+        `https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuAs0fUxYQyg_Zu6ie-Wnvv-3Z_-33FWU`,
+        requestBody,
+      ) // Make a POST request to the Vision API endpoint with the request body.
+      .then(response => {
+        // Handle the response from the Vision API.
+        console.log(response); // Log the response from the Vision API to the console.
+      })
+      .catch(err => {
+        // Handle any errors that occur when making the POST request to the Vision API endpoint.
+
+        console.error('ERROR', err); // Log any errors that occur when making the POST request to the Vision API endpoint to the console.
+      });
+  };
+
+  //   async function pushImageToTheGoogleVisionApi(base64) {
+
+  //     return await
+  //         fetch(config.googleCloud.api + config.googleCloud.apiKey, {
+  //             method: 'POST',
+  //             body: JSON.stringify({
+  //                 "requests": [
+  //                     {
+  //                         "image": {
+  //                             "content": base64
+  //                         },
+  //                         "features": [
+  //                             {
+  //                                 "type": "LABEL_DETECTION"
+  //                             }
+  //                         ]
+  //                     }
+  //                 ]
+  //             })
+  //         }).then((response) => {
+  //           console.log('GoogleVision',response)
+  //             // return response.json();
+  //         }, (err) => {
+  //             console.error('promise rejected')
+  //             console.error(err)
+  //         });
+  // }
   const handleCreateAccount = () => {
     let data = {};
     data.name = name;
@@ -75,12 +137,12 @@ const CreateAccount = props => {
       //   name: 'OtpScreen',
       // });
       dispatch(setIsAuthenticated(true));
-      dispatch(setUserDetails([name, email,profileImage]));
+      dispatch(setUserDetails([name, email, profileImage]));
     } else {
       toastr.showToast(validation.message);
     }
   };
- const requestPermission = async () => {
+  const requestPermission = async () => {
     if (Platform.OS === 'ios') {
       this.handleImageUpload();
     } else {
@@ -107,14 +169,14 @@ const CreateAccount = props => {
     }
   };
 
- const handleImageUpload = () => {
+  const handleImageUpload = () => {
     let options = {
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
-    ImagePicker.launchCamera(options, (response) => {
+    ImagePicker.launchCamera(options, response => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -126,20 +188,21 @@ const CreateAccount = props => {
         alert(response.customButton);
       } else {
         console.log('response', JSON.stringify(response));
-      
         setprofileImage(response);
+        pushImageToTheGoogleVisionApi(response?.assets[0]?.uri);
+        setshowImagePopup(false);
       }
     });
   };
 
- const handleGalleryUpload = () => {
+  const handleGalleryUpload = () => {
     let options = {
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
-    ImagePicker.launchImageLibrary(options, (response) => {
+    ImagePicker.launchImageLibrary(options, response => {
       console.log('Response = ', response);
 
       if (response.didCancel) {
@@ -151,8 +214,10 @@ const CreateAccount = props => {
         alert(response.customButton);
       } else {
         console.log('response', JSON.stringify(response));
-        
+
         setprofileImage(response);
+        pushImageToTheGoogleVisionApi(response?.assets[0]?.uri);
+        setshowImagePopup(false);
       }
     });
   };
@@ -160,145 +225,170 @@ const CreateAccount = props => {
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
-      <StatusBar backgroundColor={Colors.teal} barStyle={'light-content'} />
-      <View style={styles.halfScreen}>
-        <TouchableOpacity onPress={() => setshowImagePopup(true)}>
-          <View style={styles.round}>
-            {profileImage ? (
-              <Image 
-              source={{uri:profileImage?.image || profileImage?.assets[0]?.uri}}
-              style={styles.profilePicture}
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={Platform.select({
+          ios: 0,
+          android: 500,
+        })}
+
+        behavior={Platform.OS == 'ios' ? 'padding' : null}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
+          <View>
+            <StatusBar
+              backgroundColor={Colors.teal}
+              barStyle={'light-content'}
+            />
+            <View style={styles.halfScreen}>
+              <TouchableOpacity onPress={() => setshowImagePopup(true)}>
+                <View style={styles.round}>
+                  {profileImage ? (
+                    <Image
+                      source={{
+                        uri:
+                          profileImage?.image || profileImage?.assets[0]?.uri,
+                      }}
+                      style={styles.profilePicture}
+                    />
+                  ) : (
+                    <Camera height={100} width={50} />
+                  )}
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.insideContainer}>
+              <Text
+                style={
+                  mode == 'dark' ? styles.darkModebelowText : styles.belowText
+                }>
+                Please enter your details.
+              </Text>
+              <TextInput
+                mode="flat"
+                label="Name"
+                value={name}
+                error={hasNameErrors}
+                maxLength={30}
+                returnKeyType={'done'}
+                onChangeText={name => {
+                  setName(name), setHasNameErrors(false);
+                }}
+                onBlur={() => {
+                  if (name.length < 0) {
+                    setHasNameErrors(false);
+                    return true;
+                  } else {
+                    setHasNameErrors(true);
+                    return false;
+                  }
+                }}
+                onSubmitEditing={() => {
+                  if (name.length < 0) {
+                    setHasNameErrors(false);
+                    return true;
+                  } else {
+                    setHasNameErrors(true);
+                    return false;
+                  }
+                }}
+                theme={{
+                  colors: {
+                    primary: mode == 'dark' ? Colors.teal : Colors.teal,
+                    placeholder:
+                      mode == 'dark' ? Colors.teal : Colors.background,
+                    text: mode == 'dark' ? Colors.secondary : Colors.background,
+                    borderWidth: 1,
+                    fontFamily: 'honc-Medium',
+                  },
+                  fonts: {
+                    regular: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                    medium: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                  },
+                }}
+                style={
+                  mode == 'dark'
+                    ? styles.darkModeTextInput
+                    : styles.textInputStyle
+                }
               />
-              
-            ) : (
-              <Camera height={100} width={50}/>
-            )}
+
+              <TextInput
+                mode="flat"
+                label="Email"
+                value={email}
+                error={hasEmailErrors}
+                returnKeyType={'done'}
+                onChangeText={email => {
+                  email.replace(/\s/g, '');
+                  setEmail(email), sethasEmailErrors(false);
+                }}
+                onBlur={() => {
+                  if (email.length < 0) {
+                    sethasEmailErrors(false);
+                    return true;
+                  } else {
+                    sethasEmailErrors(true);
+                    return false;
+                  }
+                }}
+                onSubmitEditing={() => {
+                  if (email.length < 0) {
+                    sethasEmailErrors(false);
+                    return true;
+                  } else {
+                    sethasEmailErrors(true);
+                    return false;
+                  }
+                }}
+                theme={{
+                  colors: {
+                    primary: mode == 'dark' ? Colors.teal : Colors.teal,
+                    placeholder:
+                      mode == 'dark' ? Colors.teal : Colors.background,
+                    text: mode == 'dark' ? Colors.secondary : Colors.background,
+                    borderWidth: 1,
+                    fontFamily: 'honc-Medium',
+                  },
+                  fonts: {
+                    regular: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                    medium: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                  },
+                }}
+                style={
+                  mode == 'dark'
+                    ? styles.darkModeTextInput
+                    : styles.textInputStyle
+                }
+              />
+
+              <DynamicButton onPress={() => handleCreateAccount()}>
+                Save
+              </DynamicButton>
+              {showImagePopup ? (
+                <CameraPopup
+                  ActivePopUp={0}
+                  camera={() => requestPermission()}
+                  gallery={() => handleGalleryUpload()}
+                  avatar={avatar_url => handleAvatarUpload(avatar_url)}
+                  modalVisible={showImagePopup}
+                  setModalVisible={() => setshowImagePopup(false)}
+                />
+              ) : null}
+            </View>
           </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.insideContainer}>
-        <Text
-          style={mode == 'dark' ? styles.darkModebelowText : styles.belowText}>
-          Please enter your details.
-        </Text>
-        <TextInput
-          mode="flat"
-          label="Name"
-          value={name}
-          error={hasNameErrors}
-          maxLength={30}
-          returnKeyType={'done'}
-          onChangeText={name => {
-            setName(name), setHasNameErrors(false);
-          }}
-          onBlur={() => {
-            if (name.length < 0) {
-              setHasNameErrors(false);
-              return true;
-            } else {
-              setHasNameErrors(true);
-              return false;
-            }
-          }}
-          onSubmitEditing={() => {
-            if (name.length < 0) {
-              setHasNameErrors(false);
-              return true;
-            } else {
-              setHasNameErrors(true);
-              return false;
-            }
-          }}
-          theme={{
-            colors: {
-              primary: mode == 'dark' ? Colors.teal : Colors.teal,
-              placeholder: mode == 'dark' ? Colors.teal : Colors.background,
-              text: mode == 'dark' ? Colors.secondary : Colors.background,
-              borderWidth: 1,
-              fontFamily: 'honc-Medium',
-            },
-            fonts: {
-              regular: {
-                fontFamily: 'honc-Medium',
-                fontWeight: 'normal',
-              },
-              medium: {
-                fontFamily: 'honc-Medium',
-                fontWeight: 'normal',
-              },
-            },
-          }}
-          style={
-            mode == 'dark' ? styles.darkModeTextInput : styles.textInputStyle
-          }
-        />
-
-        <TextInput
-          mode="flat"
-          label="Email"
-          value={email}
-          error={hasEmailErrors}
-          returnKeyType={'done'}
-          onChangeText={email => {
-            email.replace(/\s/g, '');
-            setEmail(email), sethasEmailErrors(false);
-          }}
-          onBlur={() => {
-            if (email.length < 0) {
-              sethasEmailErrors(false);
-              return true;
-            } else {
-              sethasEmailErrors(true);
-              return false;
-            }
-          }}
-          onSubmitEditing={() => {
-            if (email.length < 0) {
-              sethasEmailErrors(false);
-              return true;
-            } else {
-              sethasEmailErrors(true);
-              return false;
-            }
-          }}
-          theme={{
-            colors: {
-              primary: mode == 'dark' ? Colors.teal : Colors.teal,
-              placeholder: mode == 'dark' ? Colors.teal : Colors.background,
-              text: mode == 'dark' ? Colors.secondary : Colors.background,
-              borderWidth: 1,
-              fontFamily: 'honc-Medium',
-            },
-            fonts: {
-              regular: {
-                fontFamily: 'honc-Medium',
-                fontWeight: 'normal',
-              },
-              medium: {
-                fontFamily: 'honc-Medium',
-                fontWeight: 'normal',
-              },
-            },
-          }}
-          style={
-            mode == 'dark' ? styles.darkModeTextInput : styles.textInputStyle
-          }
-        />
-
-        <DynamicButton onPress={() => handleCreateAccount()}>
-          Save
-        </DynamicButton>
-        {showImagePopup ? (
-          <CameraPopup
-            ActivePopUp={0}
-            camera={()=>requestPermission()}
-            gallery={()=>handleGalleryUpload()}
-            avatar={avatar_url => handleAvatarUpload(avatar_url)}
-            modalVisible={showImagePopup}
-            setModalVisible={() => setshowImagePopup(false)}
-          />
-        ) : null}
-      </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -317,7 +407,7 @@ const styles = StyleSheet.create({
   insideContainer: {
     marginHorizontal: scale(23),
     marginTop: '20%',
-    flex: 1,
+    // flex: 1,
   },
   welcomeText: {
     fontSize: scale(30),
@@ -369,20 +459,20 @@ const styles = StyleSheet.create({
   },
   halfScreen: {
     backgroundColor: Colors.teal,
-    flex: 0.6,
     alignItems: 'center',
   },
   round: {
     backgroundColor: '#f2f2f2',
     alignItems: 'center',
     borderRadius: scale(100),
-    height:scale(140),width:scale(140),
-    alignItems:'center',
-    marginTop: '20%',
+    height: scale(140),
+    width: scale(140),
+    marginVertical:'5%',
+    justifyContent: 'center',
   },
-  profilePicture:{
-    height:scale(140),
-    width:scale(140),
-    borderRadius:scale(100)
-  }
+  profilePicture: {
+    height: scale(140),
+    width: scale(140),
+    borderRadius: scale(100),
+  },
 });
