@@ -79,10 +79,10 @@ const HomeScreen = props => {
           </Text>
           <PremiumBlock title={user[0]} subTitle={user[1]} onPress={()=>props?.navigation?.navigate('FABScreen')} />
           <SwipeUnlock/>
-          <MonthlyCalendarComponent
+          {/* <MonthlyCalendarComponent
             service_dates={props?.service_dates}
             selectedDate={props?.selectedDate}
-          />
+          /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

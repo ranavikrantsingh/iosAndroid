@@ -30,7 +30,7 @@ export default function Routes() {
         initialRouteName={AnimatedBottomTab_1}>
         <Stack.Screen
           name="TabNavigator"
-          component={AnimatedBottomTab_2}
+          component={TabNavigator_1}
           options={HiddenScreenOptions}
         />
         <Stack.Screen

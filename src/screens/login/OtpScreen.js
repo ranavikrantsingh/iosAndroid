@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, SafeAreaView,StatusBar} from 'react-native';
+import {StyleSheet, View, Text, SafeAreaView, StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import DynamicButton from '../../components/DynamicButton';
@@ -29,7 +29,7 @@ const OtpScreen = props => {
   return (
     <SafeAreaView
       style={mode == 'dark' ? styles.darkModeContainer : styles.mainContainer}>
-         <FocusAwareStatusBar
+      <FocusAwareStatusBar
         backgroundColor={mode == 'dark' ? '#121212' : '#fff'}
         barStyle={mode == 'dark' ? 'light-content' : 'dark-content'}
       />
@@ -45,7 +45,7 @@ const OtpScreen = props => {
           Please enter the otp sent to {replaced}
         </Text>
         <OTPInputView
-          style={{width: '80%', height: 200}}
+          style={{width: '80%', height: scale(100),color:'#000'}}
           pinCount={4}
           autoFocusOnLoad
           codeInputFieldStyle={styles.underlineStyleBase}
@@ -54,6 +54,7 @@ const OtpScreen = props => {
             console.log(`Code is ${code}, you are good to go!`);
           }}
         />
+        
         <DynamicButton onPress={() => handleOnLogin()}>Login</DynamicButton>
       </View>
     </SafeAreaView>
@@ -124,5 +125,16 @@ const styles = StyleSheet.create({
     height: scale(50),
     marginTop: scale(-5),
     backgroundColor: Colors.secondary,
+  },
+  underlineStyleBase: {
+    // width: 30,
+    // height: 45,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+  },
+
+  underlineStyleHighLighted: {
+    borderColor: Colors.teal,
+    borderBottomWidth: scale(1),
   },
 });
