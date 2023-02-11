@@ -9,6 +9,7 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import {scale} from '../../../utils/scaling';
 import Colors from '../../../constants/Colors';
@@ -193,10 +194,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     backgroundColor: 'white',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    borderTopRightRadius:scale(20),
+    borderTopLeftRadius: scale(20),
     paddingTop: scale(20),
-    width: scale(384),
+    width: Dimensions.get('window').width,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

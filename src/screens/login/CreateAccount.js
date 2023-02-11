@@ -232,7 +232,7 @@ const headerHeight = useHeaderHeight()
         })}
 
         behavior={Platform.OS == 'ios' ? 'padding' : null}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
           <View>
             <StatusBar
               backgroundColor={Colors.teal}
@@ -293,8 +293,7 @@ const headerHeight = useHeaderHeight()
                 theme={{
                   colors: {
                     primary: mode == 'dark' ? Colors.teal : Colors.teal,
-                    placeholder:
-                      mode == 'dark' ? Colors.teal : Colors.background,
+                    placeholder:mode == 'dark' ? Colors.teal : Colors.background,
                     text: mode == 'dark' ? Colors.secondary : Colors.background,
                     borderWidth: 1,
                     fontFamily: 'honc-Medium',
