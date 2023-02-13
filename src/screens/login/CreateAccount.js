@@ -24,19 +24,24 @@ import CameraPopup from './components/CameraPopup';
 import Camera from '../../assets/svg/Camerablue.svg';
 import DynamicButton from '../../components/DynamicButton';
 import config from './config.json';
-import { useHeaderHeight } from '@react-navigation/elements'
+import {useHeaderHeight} from '@react-navigation/elements';
 import callApi from '../../utils/apiCaller';
 import axios from 'axios';
 const CreateAccount = props => {
   const dispatch = useDispatch();
-const headerHeight = useHeaderHeight()
+  const headerHeight = useHeaderHeight();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [dateOfBirth, setdateOfBirth] = useState('');
+  const [aadharNo, setaadharNo] = useState('');
   const [profileImage, setprofileImage] = useState(null);
   const [showImagePopup, setshowImagePopup] = useState(false);
   const [hasNameErrors, setHasNameErrors] = useState(false);
+  const [hasDobErrors, sethasDobErrors] = useState(false);
+  const [hasAadharNoError, sethasAadharNoError] = useState(false);
   const [hasEmailErrors, sethasEmailErrors] = useState(false);
-  const [responsefromTheImageObject, setresponsefromTheImageObject] = useState('')
+  const [responsefromTheImageObject, setresponsefromTheImageObject] =
+    useState('');
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
 
@@ -55,6 +60,18 @@ const headerHeight = useHeaderHeight()
       output.isValid = false;
       output.message = 'please enter name';
       setHasNameErrors(true);
+      return output;
+    }
+    if (!input.dateOfBirth) {
+      output.isValid = false;
+      output.message = 'please enter Date of Birth';
+      sethasDobErrors(true);
+      return output;
+    }
+    if (!input.aadharNo) {
+      output.isValid = false;
+      output.message = 'please enter Aadhar Number';
+      sethasAadharNoError(true);
       return output;
     }
     if (
@@ -76,22 +93,26 @@ const headerHeight = useHeaderHeight()
   //give me a code for googlevision api caller using axios
 
   const pushImageToTheGoogleVisionApi = image => {
-    let data={
-      task_id: "74f4c926-250c-43ca-9c53-453e87ceacd1",
-      group_id: "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
-      data:{
-        document1:image,
-        consent:'yes'
-      }
-    }
-   callApi(`ind_aadhaar`,'post',data).then(res=>{
-    if (res) {
-      console.log('res', res)
-      setresponsefromTheImageObject(res?.result?.extraction_output)
-    }
-   }).catch(err=>{
-    console.log('err', err)
-   })
+    let data = {
+      task_id: '74f4c926-250c-43ca-9c53-453e87ceacd1',
+      group_id: '8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e',
+      data: {
+        document1: image,
+        consent: 'yes',
+      },
+    };
+    callApi(`ind_aadhaar`, 'post', data)
+      .then(res => {
+        if (res) {
+          console.log('res', res);
+          setresponsefromTheImageObject(res?.result?.extraction_output);
+          alert(res?.message);
+        } else {
+        }
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   };
 
   //   async function pushImageToTheGoogleVisionApi(base64) {
@@ -172,7 +193,7 @@ const headerHeight = useHeaderHeight()
         skipBackup: true,
         path: 'images',
       },
-      includeBase64: true 
+      includeBase64: true,
     };
     ImagePicker.launchCamera(options, response => {
       console.log('Response = ', response);
@@ -199,7 +220,7 @@ const headerHeight = useHeaderHeight()
         skipBackup: true,
         path: 'images',
       },
-      includeBase64: true //add this in the option to include base64 value in the response
+      includeBase64: true, //add this in the option to include base64 value in the response
     };
     ImagePicker.launchImageLibrary(options, response => {
       console.log('Response = ', response);
@@ -229,9 +250,8 @@ const headerHeight = useHeaderHeight()
           ios: 0,
           android: 500,
         })}
-
         behavior={Platform.OS == 'ios' ? 'padding' : null}>
-        <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View>
             <StatusBar
               backgroundColor={Colors.teal}
@@ -264,7 +284,7 @@ const headerHeight = useHeaderHeight()
               <TextInput
                 mode="flat"
                 label="Name"
-                value={name||responsefromTheImageObject?.name_on_card}
+                value={name || responsefromTheImageObject?.name_on_card}
                 error={hasNameErrors}
                 maxLength={30}
                 returnKeyType={'done'}
@@ -292,7 +312,8 @@ const headerHeight = useHeaderHeight()
                 theme={{
                   colors: {
                     primary: mode == 'dark' ? Colors.teal : Colors.teal,
-                    placeholder:mode == 'dark' ? Colors.teal : Colors.background,
+                    placeholder:
+                      mode == 'dark' ? Colors.teal : Colors.background,
                     text: mode == 'dark' ? Colors.secondary : Colors.background,
                     borderWidth: 1,
                     fontFamily: 'honc-Medium',
@@ -340,6 +361,115 @@ const headerHeight = useHeaderHeight()
                     return true;
                   } else {
                     sethasEmailErrors(true);
+                    return false;
+                  }
+                }}
+                theme={{
+                  colors: {
+                    primary: mode == 'dark' ? Colors.teal : Colors.teal,
+                    placeholder:
+                      mode == 'dark' ? Colors.teal : Colors.background,
+                    text: mode == 'dark' ? Colors.secondary : Colors.background,
+                    borderWidth: 1,
+                    fontFamily: 'honc-Medium',
+                  },
+                  fonts: {
+                    regular: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                    medium: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                  },
+                }}
+                style={
+                  mode == 'dark'
+                    ? styles.darkModeTextInput
+                    : styles.textInputStyle
+                }
+              />
+              <TextInput
+                mode="flat"
+                label="Date Of Birth"
+                value={dateOfBirth || responsefromTheImageObject?.date_of_birth}
+                error={hasDobErrors}
+                maxLength={10}
+                returnKeyType={'done'}
+                onChangeText={dateOfBirth => {
+                  setdateOfBirth(dateOfBirth), sethasDobErrors(false);
+                }}
+                onBlur={() => {
+                  if (dateOfBirth.length < 0) {
+                    sethasDobErrors(false);
+                    return true;
+                  } else {
+                    sethasDobErrors(true);
+                    return false;
+                  }
+                }}
+                onSubmitEditing={() => {
+                  if (dateOfBirth.length < 0) {
+                    sethasDobErrors(false);
+                    return true;
+                  } else {
+                    sethasDobErrors(true);
+                    return false;
+                  }
+                }}
+                theme={{
+                  colors: {
+                    primary: mode == 'dark' ? Colors.teal : Colors.teal,
+                    placeholder:
+                      mode == 'dark' ? Colors.teal : Colors.background,
+                    text: mode == 'dark' ? Colors.secondary : Colors.background,
+                    borderWidth: 1,
+                    fontFamily: 'honc-Medium',
+                  },
+                  fonts: {
+                    regular: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                    medium: {
+                      fontFamily: 'honc-Medium',
+                      fontWeight: 'normal',
+                    },
+                  },
+                }}
+                style={
+                  mode == 'dark'
+                    ? styles.darkModeTextInput
+                    : styles.textInputStyle
+                }
+              />
+
+              <TextInput
+                mode="flat"
+                label="Aadhar Card No"
+                value={aadharNo || responsefromTheImageObject?.id_number}
+                error={hasAadharNoError}
+                maxLength={12}
+                returnKeyType={'done'}
+                onChangeText={aadharNo => {
+                  setaadharNo(aadharNo), sethasAadharNoError(false);
+                }}
+                onBlur={() => {
+                  if (aadharNo.length < 0) {
+                    sethasAadharNoError(false);
+                    return true;
+                  } else {
+                    sethasAadharNoError(true);
+                    return false;
+                  }
+                }}
+                onSubmitEditing={() => {
+                  if (aadharNo.length < 0) {
+                    sethasAadharNoError(false);
+                    return true;
+                  } else {
+                    sethasAadharNoError(true);
                     return false;
                   }
                 }}
@@ -465,7 +595,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(100),
     height: scale(140),
     width: scale(140),
-    marginVertical:'5%',
+    marginVertical: '5%',
     justifyContent: 'center',
   },
   profilePicture: {
