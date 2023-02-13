@@ -25,7 +25,7 @@ import Camera from '../../assets/svg/Camerablue.svg';
 import DynamicButton from '../../components/DynamicButton';
 import config from './config.json';
 import { useHeaderHeight } from '@react-navigation/elements'
-
+import callApi from '../../utils/apiCaller';
 import axios from 'axios';
 const CreateAccount = props => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const headerHeight = useHeaderHeight()
   const [showImagePopup, setshowImagePopup] = useState(false);
   const [hasNameErrors, setHasNameErrors] = useState(false);
   const [hasEmailErrors, sethasEmailErrors] = useState(false);
+  const [responsefromTheImageObject, setresponsefromTheImageObject] = useState('')
   const theme = useSelector(state => state.appReducer);
   const [mode, setMode] = useState(theme.mode);
 
@@ -75,29 +76,22 @@ const headerHeight = useHeaderHeight()
   //give me a code for googlevision api caller using axios
 
   const pushImageToTheGoogleVisionApi = image => {
-    const requestBody = {
-      requests: [
-        {
-          image: {source: {imageUri: image}}, // Replace with your image URL here.
-          features: [{type: 'LABEL_DETECTION', maxResults: 5}], // Replace with your feature type here.
-        },
-      ],
-    };
-
-    axios
-      .post(
-        `https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBuAs0fUxYQyg_Zu6ie-Wnvv-3Z_-33FWU`,
-        requestBody,
-      ) // Make a POST request to the Vision API endpoint with the request body.
-      .then(response => {
-        // Handle the response from the Vision API.
-        console.log(response); // Log the response from the Vision API to the console.
-      })
-      .catch(err => {
-        // Handle any errors that occur when making the POST request to the Vision API endpoint.
-
-        console.error('ERROR', err); // Log any errors that occur when making the POST request to the Vision API endpoint to the console.
-      });
+    let data={
+      task_id: "74f4c926-250c-43ca-9c53-453e87ceacd1",
+      group_id: "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
+      data:{
+        document1:image,
+        consent:'yes'
+      }
+    }
+   callApi(`ind_aadhaar`,'post',data).then(res=>{
+    if (res) {
+      console.log('res', res)
+      setresponsefromTheImageObject(res?.result?.extraction_output)
+    }
+   }).catch(err=>{
+    console.log('err', err)
+   })
   };
 
   //   async function pushImageToTheGoogleVisionApi(base64) {
@@ -171,10 +165,14 @@ const headerHeight = useHeaderHeight()
 
   const handleImageUpload = () => {
     let options = {
+      // maxHeight: 250,
+      // maxWidth: 350,
+      // includeBase64: true //
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
+      includeBase64: true 
     };
     ImagePicker.launchCamera(options, response => {
       console.log('Response = ', response);
@@ -189,7 +187,7 @@ const headerHeight = useHeaderHeight()
       } else {
         console.log('response', JSON.stringify(response));
         setprofileImage(response);
-        pushImageToTheGoogleVisionApi(response?.assets[0]?.uri);
+        pushImageToTheGoogleVisionApi(response?.assets[0]?.base64);
         setshowImagePopup(false);
       }
     });
@@ -201,6 +199,7 @@ const headerHeight = useHeaderHeight()
         skipBackup: true,
         path: 'images',
       },
+      includeBase64: true //add this in the option to include base64 value in the response
     };
     ImagePicker.launchImageLibrary(options, response => {
       console.log('Response = ', response);
@@ -216,7 +215,7 @@ const headerHeight = useHeaderHeight()
         console.log('response', JSON.stringify(response));
 
         setprofileImage(response);
-        pushImageToTheGoogleVisionApi(response?.assets[0]?.uri);
+        pushImageToTheGoogleVisionApi(response?.assets[0]?.base64);
         setshowImagePopup(false);
       }
     });
@@ -265,7 +264,7 @@ const headerHeight = useHeaderHeight()
               <TextInput
                 mode="flat"
                 label="Name"
-                value={name}
+                value={name||responsefromTheImageObject?.name_on_card}
                 error={hasNameErrors}
                 maxLength={30}
                 returnKeyType={'done'}
