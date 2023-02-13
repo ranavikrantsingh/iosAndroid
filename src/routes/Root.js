@@ -1,64 +1,54 @@
-import React, {Component, useEffect} from 'react';
-import {Alert, BackHandler, View, ActivityIndicator} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  SafeAreaView,
+  View,
+  StatusBar,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-
-import _ from 'lodash';
 import Routes from './Routes';
 import LoginRoutes from './LoginRoutes';
-import DeviceInfo from 'react-native-device-info';
-import { setDeviceId } from '../redux/actions';
-// export let API_URL = 'https://api.honc.io';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
+import Colors from '../constants/Colors';
+import Preloader from '../components/Preloader';
+const Root = props => {
+  const [connectedToTheInternet, setconnectedToTheInternet] = useState(false);
 
-class Root extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      deviceInfo: {},
-      isFetchingApiUrl: false,
-    };
-    //OneSignal Init Code
-    // OneSignal.setLogLevel(6, 0);
-    // OneSignal.setAppId('c14f8536-c3f8-47b1-9a04-781e464aa2aa');
-    //END OneSignal Init Code
-
-    //Method for handling notifications opened
-    // OneSignal.setNotificationOpenedHandler(notification => {
-    //   console.log('OneSignal: notification opened:', notification);
-    // });
-  }
-
-//   async componentDidMount() {
-//     var uniqueId = DeviceInfo.getModel();
-//     this.props.setDeviceId(uniqueId);
-//   }
-
-
-  componentDidUpdate(prevProps, prevState) {}
-
-  
-
-  render() {
- 
-      if (this.props.isAuthenticated) {
-        return <Routes />;
+  useEffect(() => {
+    NetInfo?.fetch().then(res => {
+      if (res?.isConnected) {
+        setconnectedToTheInternet(true);
+      } else {
+        setconnectedToTheInternet(false);
       }
-      else{
-        return <LoginRoutes />;
-      }
-   
-  }
-}
+    });
+  }, [connectedToTheInternet]);
 
+  if (connectedToTheInternet) {
+    if (props?.isAuthenticated) {
+      return <Routes />;
+    } else {
+      return <LoginRoutes />;
+    }
+  } else {
+    return (
+      <SafeAreaView style={styles?.mainContainer}>
+        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
+        <Preloader />
+      </SafeAreaView>
+    );
+  }
+};
 const mapStateToProps = state => ({
-  deviceId: state.appReducer.deviceId,
   isAuthenticated: state.appReducer.isAuthenticated,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setDeviceId: deviceId => {
-    dispatch(setDeviceId(deviceId));
-  }
-});
+export default connect(mapStateToProps)(Root);
 
-export default connect(mapStateToProps,mapDispatchToProps)(Root);
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
