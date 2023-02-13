@@ -1,24 +1,20 @@
-import {
-  ActivityIndicator,
-  StyleSheet,
-  SafeAreaView,
-  View,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import Routes from './Routes';
 import LoginRoutes from './LoginRoutes';
 import NetInfo from '@react-native-community/netinfo';
-import Colors from '../constants/Colors';
 import Preloader from '../components/Preloader';
+import NoInternetScreen from '../screens/tools/NoInternetScreen';
 const Root = props => {
   const [connectedToTheInternet, setconnectedToTheInternet] = useState(false);
+  const [connectionStatus, setconnectionStatus] = useState('');
 
   useEffect(() => {
     NetInfo?.fetch().then(res => {
       if (res?.isConnected) {
         setconnectedToTheInternet(true);
+        setconnectionStatus(res);
       } else {
         setconnectedToTheInternet(false);
       }
@@ -26,10 +22,14 @@ const Root = props => {
   }, [connectedToTheInternet]);
 
   if (connectedToTheInternet) {
-    if (props?.isAuthenticated) {
-      return <Routes />;
+    if (connectionStatus?.isConnected) {
+      if (props?.isAuthenticated) {
+        return <Routes />;
+      } else {
+        return <LoginRoutes />;
+      }
     } else {
-      return <LoginRoutes />;
+      return <NoInternetScreen />;
     }
   } else {
     return (
