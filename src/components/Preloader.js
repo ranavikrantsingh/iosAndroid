@@ -1,17 +1,20 @@
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View, StatusBar} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
 import {scale} from '../utils/scaling';
 const Preloader = () => {
   return (
-    <View style={styles?.preloader}>
-      <LottieView
-        source={require('../assets/animations/preloader.json')}
-        autoPlay
-        loop
-        style={styles?.lottieAnimation}
-      />
-    </View>
+    <SafeAreaView style={styles.mainContainer}>
+      <StatusBar barStyle={'dark-content'} backgroundColor={'#fff'} />
+      <View style={styles?.preloader}>
+        <LottieView
+          source={require('../assets/animations/preloader.json')}
+          autoPlay
+          loop
+          style={styles?.lottieAnimation}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -26,5 +29,9 @@ const styles = StyleSheet.create({
   lottieAnimation: {
     height: scale(50),
     width: scale(50),
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });

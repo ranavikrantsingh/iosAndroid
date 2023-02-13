@@ -1,4 +1,4 @@
-import {StyleSheet, SafeAreaView, StatusBar} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import Routes from './Routes';
@@ -32,12 +32,7 @@ const Root = props => {
       return <NoInternetScreen />;
     }
   } else {
-    return (
-      <SafeAreaView style={styles?.mainContainer}>
-        <StatusBar backgroundColor={'#fff'} barStyle={'dark-content'} />
-        <Preloader />
-      </SafeAreaView>
-    );
+    return <Preloader />;
   }
 };
 const mapStateToProps = state => ({
