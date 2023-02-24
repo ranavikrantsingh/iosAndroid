@@ -7,7 +7,7 @@ import {
   SET_IS_AUTHENTICATED,
   SET_LOGOUT,
   THEME_CHANGE
-} from './methods';
+} from '../methods/methods';
 
 const initialState = {
   otpToken: '',
