@@ -12,6 +12,8 @@ export default async function callApi(endpoint, method = 'get', body) {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       session: `${token}`,
+      'account-id': `${config?.accountId}`,
+      'api-key': `${config?.apiKey}`,
     },
     method,
   };
