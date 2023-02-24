@@ -15,7 +15,7 @@ import {
 } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Colors from '../../constants/Colors';
-import {logout, switchMode} from '../../redux/actions';
+import {logout, switchMode} from '../../redux/actions/actions';
 import DarkModeSwitch from '../../components/DarkModeSwitch';
 import {useDispatch, useSelector} from 'react-redux';
 import all_styles from '../../styles/all_styles';

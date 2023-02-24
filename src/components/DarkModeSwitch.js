@@ -2,7 +2,7 @@ import {StyleSheet, Animated, View, TouchableOpacity} from 'react-native';
 import React, {useState, useRef,useEffect} from 'react';
 import LottieView from 'lottie-react-native';
 import { useSelector,useDispatch } from 'react-redux';
-import { switchMode } from '../redux/actions';
+import { switchMode } from '../redux/actions/actions';
 const CheckBoxSquare = props => {
   const dispatch = useDispatch()
   const progress = useRef(new Animated.Value(0)).current;

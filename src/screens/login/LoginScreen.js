@@ -15,7 +15,7 @@ import Colors from '../../constants/Colors';
 import {useDispatch, useSelector} from 'react-redux';
 import DynamicButton from '../../components/DynamicButton';
 import CheckBoxSquare from '../../components/CheckBoxSquare';
-import {setMobileNumber, switchMode} from '../../redux/actions';
+import {setMobileNumber, switchMode} from '../../redux/actions/actions';
 import {useIsFocused} from '@react-navigation/native';
 
 const LoginScreen = props => {

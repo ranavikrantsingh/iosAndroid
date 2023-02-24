@@ -19,7 +19,7 @@ import {toastr} from '../../utils/toast';
 import * as ImagePicker from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
-import {setIsAuthenticated, setUserDetails} from '../../redux/actions';
+import {setIsAuthenticated, setUserDetails} from '../../redux/actions/actions';
 import CameraPopup from './components/CameraPopup';
 import Camera from '../../assets/svg/Camerablue.svg';
 import DynamicButton from '../../components/DynamicButton';
