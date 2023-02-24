@@ -1,5 +1,6 @@
 import config from '../config/config';
 import {store} from '../redux/store';
+import ApiErrorHandler from './ApiErrorHandler';
 export const API_URL = config.apiUrl;
 
 const fetch = window.fetch;
@@ -32,6 +33,7 @@ export default async function callApi(endpoint, method = 'get', body) {
       return response;
     })
     .catch(err => {
-      console.log(err);
+      ApiErrorHandler.selectMessage(err);
+      console.error(err);
     });
 }

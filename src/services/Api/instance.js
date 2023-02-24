@@ -1,7 +1,7 @@
 import axios from 'axios';
 import perf from '@react-native-firebase/perf';
 // import Qs from 'qs';
-import { store } from '../../store';
+import {store} from '../../store';
 // import storage from '../storage';
 import config from '../../config/config';
 
@@ -9,7 +9,7 @@ export const instance = axios.create({
   baseURL: config.apiUrl,
   responseType: 'json',
   headers: {
-    'User-Agent': 'Heritage App',
+    'User-Agent': 'iosAndroid',
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With',
@@ -26,10 +26,10 @@ instance.CancelToken = axios.CancelToken;
 instance.isCancel = axios.isCancel;
 instance.Cancel = axios.Cancel;
 
-instance.interceptors.request.use(async (reqConfig) => {
+instance.interceptors.request.use(async reqConfig => {
   try {
     const httpMetric = perf().newHttpMetric(reqConfig.url, reqConfig.method);
-    reqConfig.metadata = { httpMetric };
+    reqConfig.metadata = {httpMetric};
 
     // add any extra metric attributes, if required
     // httpMetric.putAttribute('userId', '12345678');
@@ -41,11 +41,11 @@ instance.interceptors.request.use(async (reqConfig) => {
 });
 
 instance.interceptors.response.use(
-  async (response) => {
+  async response => {
     try {
       // Request was successful, e.g. HTTP code 200
 
-      const { httpMetric } = response.config.metadata;
+      const {httpMetric} = response.config.metadata;
 
       // add any extra metric attributes if needed
       // httpMetric.putAttribute('userId', '12345678');
@@ -57,11 +57,11 @@ instance.interceptors.response.use(
       return response;
     }
   },
-  async (error) => {
+  async error => {
     try {
       // Request failed, e.g. HTTP code 500
 
-      const { httpMetric } = error.config.metadata;
+      const {httpMetric} = error.config.metadata;
 
       // add any extra metric attributes if needed
       // httpMetric.putAttribute('userId', '12345678');
@@ -76,23 +76,23 @@ instance.interceptors.response.use(
   },
 );
 
-export const setHeaderToken = (userToken) => {
+export const setHeaderToken = userToken => {
   if (userToken) {
     instance.defaults.headers.common.session = userToken;
   }
 };
 
-const onSuccess = (response) => {
+const onSuccess = response => {
   console.debug('Request Successful!', response);
   return response.data;
 };
 
-const onError = (error) => {
+const onError = error => {
   console.debug('Request Failed:', error.config);
   return Promise.reject(error);
 };
 
-const request = async (options) => {
+const request = async options => {
   let source;
   // const token = store.getState().auth.token;
 
@@ -101,7 +101,7 @@ const request = async (options) => {
   }
 
   source = axios.CancelToken.source();
-  Object.assign(options, { cancelToken: source.token });
+  Object.assign(options, {cancelToken: source.token});
 
   try {
     // instance.defaults.headers.common.session = token;
